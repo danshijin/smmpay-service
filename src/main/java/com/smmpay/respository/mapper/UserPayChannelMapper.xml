@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.UserPayChannelMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.UserPayChannel" >
+    <id column="user_pay_channel_id" property="userPayChannelId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="pay_channel_id" property="payChannelId" jdbcType="INTEGER" />
+    <result column="user_account_no" property="userAccountNo" jdbcType="VARCHAR" />
+    <result column="user_account_name" property="userAccountName" jdbcType="VARCHAR" />
+    <result column="user_account_status" property="userAccountStatus" jdbcType="INTEGER" />
+    <result column="freeze_money" property="freezeMoney" jdbcType="DECIMAL" />
+    <result column="use_money" property="useMoney" jdbcType="DECIMAL" />
+    <result column="smm_freeze_money" property="smmFreezeMoney" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_pay_channel_id, user_id, pay_channel_id, user_account_no, user_account_name, 
+    user_account_status, freeze_money, use_money, smm_freeze_money, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_pay_channel
+    where user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_pay_channel
+    where user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.UserPayChannel" >
+    insert into user_pay_channel (user_pay_channel_id, user_id, pay_channel_id, 
+      user_account_no, user_account_name, user_account_status, 
+      freeze_money, use_money,smm_freeze_money, create_time
+      )
+    values (#{userPayChannelId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{payChannelId,jdbcType=INTEGER}, 
+      #{userAccountNo,jdbcType=VARCHAR}, #{userAccountName,jdbcType=VARCHAR}, #{userAccountStatus,jdbcType=INTEGER}, 
+      #{freezeMoney,jdbcType=DECIMAL}, #{useMoney,jdbcType=DECIMAL},#{smmFreezeMoney,jdbcType=DECIMAL}, #{createTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.UserPayChannel" >
+    insert into user_pay_channel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userPayChannelId != null" >
+        user_pay_channel_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id,
+      </if>
+      <if test="userAccountNo != null" >
+        user_account_no,
+      </if>
+      <if test="userAccountName != null" >
+        user_account_name,
+      </if>
+      <if test="userAccountStatus != null" >
+        user_account_status,
+      </if>
+      <if test="freezeMoney != null" >
+        freeze_money,
+      </if>
+      <if test="useMoney != null" >
+        use_money,
+      </if>
+      <if test="smmFreezeMoney != null">
+        smm_freeze_money,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userPayChannelId != null" >
+        #{userPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelId != null" >
+        #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccountNo != null" >
+        #{userAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccountName != null" >
+        #{userAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccountStatus != null" >
+        #{userAccountStatus,jdbcType=INTEGER},
+      </if>
+      <if test="freezeMoney != null" >
+        #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="useMoney != null" >
+        #{useMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="smmFreezeMoney != null">
+        #{smmFreezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.UserPayChannel" >
+    update user_pay_channel
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccountNo != null" >
+        user_account_no = #{userAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccountName != null" >
+        user_account_name = #{userAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccountStatus != null" >
+        user_account_status = #{userAccountStatus,jdbcType=INTEGER},
+      </if>
+      <if test="freezeMoney != null" >
+        freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="useMoney != null" >
+        use_money = #{useMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="smmFreezeMoney != null">
+        smm_freeze_money = #{smmFreezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.UserPayChannel" >
+    update user_pay_channel
+    set user_id = #{userId,jdbcType=INTEGER},
+      pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      user_account_no = #{userAccountNo,jdbcType=VARCHAR},
+      user_account_name = #{userAccountName,jdbcType=VARCHAR},
+      user_account_status = #{userAccountStatus,jdbcType=INTEGER},
+      freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+      use_money = #{useMoney,jdbcType=DECIMAL},
+      smm_freeze_money = #{smmFreezeMoney,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=VARCHAR}
+    where user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </update>
+  <!-- 更新用户支付通道余额 -->
+  <update id="updateUserMoneyByUserIdPCId" parameterType="java.util.HashMap" >
+    update user_pay_channel
+    set 
+      use_money = use_money+#{changeMoney,jdbcType=DECIMAL}
+    where  user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </update>
+  <!--  查询用户支付通道余额 -->
+  <select id="queryUserMoney" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_pay_channel
+    where user_id = #{userId,jdbcType=INTEGER} and pay_channel_id = #{payChannelId,jdbcType=INTEGER}
+  </select>
+  <!-- 查询用户支付通道 -->
+  <select id="queryPayChannelByUserId" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_pay_channel
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <!-- 查询当前订单支付渠道对应的用户支付通道 -->
+  <select id="queryPayChannelByUserIdAndOrderChannel" resultMap="BaseResultMap" parameterType="com.smmpay.respository.model.UserPayChannel" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_pay_channel
+    where user_id = #{userId,jdbcType=INTEGER} 
+    AND pay_channel_id = #{payChannelId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByUserIdAndPayChannelId" resultMap="BaseResultMap" parameterType="com.smmpay.respository.model.UserPayChannel" >
+    select
+    <include refid="Base_Column_List" />
+    from user_pay_channel
+    where user_id = #{userId,jdbcType=INTEGER}
+    and pay_channel_id = #{payChannelId,jdbcType=INTEGER}
+  </select>
+  <!-- 更新用户支付通道余额2 -->
+  <update id="updateUserMoneyByUserIdPCId2" parameterType="java.util.HashMap" >
+    update user_pay_channel
+    set 
+      use_money = use_money-#{changeMoney,jdbcType=DECIMAL},
+      freeze_money = freeze_money+#{changeMoney,jdbcType=DECIMAL}
+    where user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </update>
+  <!-- 更新用户支付通道余额3 -->
+  <update id="updateUserMoneyByUserIdPCId3" parameterType="java.util.HashMap" >
+    update user_pay_channel
+    set 
+      use_money = use_money-#{changeMoney,jdbcType=DECIMAL}
+    where user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 更新用户支付通道冻结余额3 -->
+  <update id="updateUserMoneyByUserIdPCId4" parameterType="java.util.HashMap" >
+    update user_pay_channel
+    set
+    smm_freeze_money = smm_freeze_money-#{changeMoney,jdbcType=DECIMAL},
+    use_money = use_money-#{xtsfam,jdbcType=DECIMAL}
+    where user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </update>
+
+   <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_pay_channel
+  </select>
+   <!-- 更新用户支付通道冻结金额-增加 -->
+  <update id="updateFreezeMoneyByUserIdPCId" parameterType="java.util.HashMap" >
+    update user_pay_channel
+    set 
+      freeze_money=freeze_money+#{freezeMoney,jdbcType=DECIMAL}
+    where where user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </update>
+   <!-- 更新用户支付通道冻结金额-减少 -->
+  <update id="updateFreezeMoneyByUserIdPCId2" parameterType="java.util.HashMap" >
+    update user_pay_channel
+    set 
+       freeze_money=freeze_money-#{freezeMoney,jdbcType=DECIMAL}
+    where user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+  </update>
+</mapper>

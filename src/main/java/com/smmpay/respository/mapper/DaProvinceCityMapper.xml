@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.DaProvinceCityMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.DaProvinceCity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="layer" property="layer" jdbcType="TINYINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="area_short_name" property="areaShortName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parent_id, layer, area_name, area_short_name, create_time, create_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from da_province_city
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from da_province_city
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.DaProvinceCity" >
+    insert into da_province_city (id, parent_id, layer, 
+      area_name, area_short_name, create_time, 
+      create_user)
+    values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{layer,jdbcType=TINYINT}, 
+      #{areaName,jdbcType=VARCHAR}, #{areaShortName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.DaProvinceCity" >
+    insert into da_province_city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="layer != null" >
+        layer,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="areaShortName != null" >
+        area_short_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="layer != null" >
+        #{layer,jdbcType=TINYINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaShortName != null" >
+        #{areaShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.DaProvinceCity" >
+    update da_province_city
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="layer != null" >
+        layer = #{layer,jdbcType=TINYINT},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaShortName != null" >
+        area_short_name = #{areaShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.DaProvinceCity" >
+    update da_province_city
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      layer = #{layer,jdbcType=TINYINT},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_short_name = #{areaShortName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectProvinceAll" resultMap="BaseResultMap">
+    SELECT id,parent_id,layer,area_name FROM da_province_city pc WHERE pc.layer = 1 
+  </select>
+  
+  <select id="selectCityAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT id,area_name FROM da_province_city pc WHERE pc.layer = 2 AND pc.parent_id = #{parentId,jdbcType=INTEGER}
+  </select>
+</mapper>

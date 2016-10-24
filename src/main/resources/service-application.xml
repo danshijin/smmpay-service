@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+    <beans xmlns="http://www.springframework.org/schema/beans"  
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"  
+        xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">  
+       
+        <!-- 具体的实现bean -->  
+        <bean id="authorService" class="com.smmpay.service.AuthorServiceImpl" />    
+        <bean id="userAccountService" class="com.smmpay.service.smmpay.UserAccountServiceImpl" />
+        <bean id="openAccountService" class="com.smmpay.service.smmpay.OpenAccountServiceImpl" />
+        <bean id="bankService" class="com.smmpay.service.smmpay.BankServiceImpl" />
+        <bean id="tradingRecordService" class="com.smmpay.service.smmpay.TradingRecordServiceImpl" />
+        <bean id="orderService" class="com.smmpay.service.smmpay.OrderServiceImpl"/>
+        <bean id="mallService" class="com.smmpay.service.smmpay.MallServiceImpl" />
+        <bean id="queryAccountBalanceService" class="com.smmpay.service.smmpay.QueryAccountBalanceServiceImpl" />
+        <bean id="queryTrRecordsService" class="com.smmpay.service.smmpay.QueryTrRecordsServiceImpl" />
+        <bean id="callThawPayService" class="com.smmpay.service.smmpay.CallThawPayServiceImpl" />
+        <bean id="callManualFreezeService" class="com.smmpay.service.smmpay.CallManualFreezeServiceImpl" />
+        <bean id="callEveryDaySettlementService" class="com.smmpay.service.smmpay.CallEveryDaySettlementServiceImpl" />
+        <bean id="callManualUNFreezeService" class="com.smmpay.service.smmpay.CallManualUNFreezeServiceImpl" />
+        <bean id="noLoginPrintService" class="com.smmpay.service.smmpay.NoLoginPrintServiceImpl" />
+        <bean id="platformDebitsService" class="com.smmpay.service.smmpay.PlatformDebitsServiceImpl" />
+        <bean id="cancelAccountService" class="com.smmpay.service.smmpay.CancelAccountServiceImpl" />
+        
+        
+       <!-- 提供方应用信息，用于计算依赖关系 -->
+        <dubbo:application name="micro_service"  />  
+       
+        <!-- 使用multicast广播注册中心暴露服务地址   -->  
+        <!--<dubbo:registry address="multicast://224.5.6.7:1234" />-->  
+        
+        <!-- 使用zookeeper注册中心暴露服务地址 -->  
+        <dubbo:registry address="N/A" />
+       
+        <!-- 用dubbo协议在20880端口暴露服务 -->  
+        <dubbo:protocol name="dubbo" port="20880" />
+       
+        <!-- 声明需要暴露的服务接口 -->  
+        <dubbo:service interface="com.smmpay.inter.AuthorService"  ref="authorService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.UserAccountService" timeout="200000" ref="userAccountService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.OpenAccountService" timeout="5000" ref="openAccountService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.BankService" timeout="50000" ref="bankService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.TradingRecordService" timeout="50000" ref="tradingRecordService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.OrderService" timeout="200000" ref="orderService"/>
+        <dubbo:service interface="com.smmpay.inter.smmpay.MallService" timeout="50000" ref="mallService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.QueryAccountBalanceService" timeout="50000" ref="queryAccountBalanceService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.QueryTrRecordsService" timeout="50000" ref="queryTrRecordsService" />
+        
+        <dubbo:service interface="com.smmpay.inter.smmpay.CallThawPayService" timeout="50000" ref="callThawPayService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.CallManualFreezeService" timeout="50000" ref="callManualFreezeService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.CallEveryDaySettlementService" timeout="50000" ref="callEveryDaySettlementService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.CallManualUNFreezeService" timeout="50000" ref="callManualUNFreezeService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.NoLoginPrintService" timeout="50000" ref="noLoginPrintService" />
+        <dubbo:service interface="com.smmpay.inter.smmpay.PlatformDebitsService" timeout="50000" ref="platformDebitsService" />
+         <dubbo:service interface="com.smmpay.inter.smmpay.CancelAccountService" timeout="50000" ref="cancelAccountService" />
+
+</beans>

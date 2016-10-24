@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>付款成功</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <h2>尊敬的${contactName}您好:</h2>
+    <p>您的付款操作(交易编号:${paymentId})已成功,交易金额为￥${dealMoney}元,该笔款项将会在您的交易账户</p>
+    <p>中冻结，直至货物确认交收完成。请牢记您的唯一支付码:${payCode},其将做为在您企业确认收货时的确认密码。</p>
+    
+    <p>
+      <table>
+         <tr><td colspan="2"></td><td colspan="2"></td></tr>
+         <tr>
+            <td>对方企业:</td>
+            <td>${sellerCompanyName}</td>
+            <td>付款方式:</td>
+            <td>${paymentType}</td>
+         </tr>
+         <tr>
+            <td>对方账号:</td>
+            <td>${sellerAccNo}</td>
+            <td>付款时间:</td>
+            <td>${createTime}</td>
+         </tr>
+         <tr>
+            <td>商品名称:</td>
+            <td>${productName}</td>
+            <td>资金流水号:</td>
+            <td>${freezeClientId}</td>
+         </tr>
+         <tr>
+            <td>商品详情:</td>
+            <td>${productDetail}</td>
+            <td>唯一支付码:</td>
+            <td>${payCode}</td>
+         </tr>
+         <tr>
+            <td>商品数量:</td>
+            <td>${productNum}</td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>交易金额:</td>
+            <td>￥{dealMoney}</td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>采购时间:</td>
+            <td>￥{orderCreateTime}</td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>交收方式:</td>
+            <td>￥{settlementType}</td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>交易类型:</td>
+            <td>￥{dealType}</td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>发票说明:</td>
+            <td>￥{invoice}</td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>交易编号:</td>
+            <td>￥{paymentId}</td>
+            <td></td>
+            <td></td>
+         </tr>
+      </table>
+    </p>
+  </body>
+</html>

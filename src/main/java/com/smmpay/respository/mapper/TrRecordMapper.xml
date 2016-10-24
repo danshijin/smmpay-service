@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.TrRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.TrRecord" >
+    <id column="tr_id" property="trId" jdbcType="INTEGER" />
+    <result column="tr_money" property="trMoney" jdbcType="DECIMAL" />
+    <result column="tr_type" property="trType" jdbcType="INTEGER" />
+    <result column="tr_apply_time" property="trApplyTime" jdbcType="VARCHAR" />
+    <result column="tr_apply_status" property="trApplyStatus" jdbcType="INTEGER" />
+    <result column="tr_charge" property="trCharge" jdbcType="DECIMAL" />
+    <result column="tr_water_id" property="trWaterId" jdbcType="VARCHAR" />
+    <result column="user_money" property="userMoney" jdbcType="DECIMAL" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_pay_channel_id" property="userPayChannelId" jdbcType="INTEGER" />
+    <result column="user_company_name" property="userCompanyName" jdbcType="VARCHAR" />
+    <result column="opposit_user_id" property="oppositUserId" jdbcType="INTEGER" />
+    <result column="opposit_user_pay_channel_id" property="oppositUserPayChannelId" jdbcType="INTEGER" />
+    <result column="opposit_company_name" property="oppositCompanyName" jdbcType="VARCHAR" />
+    <result column="outcome_bank_name" property="outcomeBankName" jdbcType="VARCHAR" />
+    <result column="outcome_bank_account_no" property="outcomeBankAccountNo" jdbcType="VARCHAR" />
+    <result column="outcome_bank_cnaps" property="outcomeBankCnaps" jdbcType="VARCHAR" />
+    <result column="print_check_code" property="printCheckCode" jdbcType="VARCHAR" />
+    <result column="pay_channel_id" property="payChannelId" jdbcType="INTEGER" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="replay_time" property="replayTime" jdbcType="VARCHAR" />
+    <result column="pay_channel_tr_time" property="payChannelTrTime" jdbcType="VARCHAR" />
+    <result column="pay_channel_tr_no" property="payChannelTrNo" jdbcType="VARCHAR" />
+    <result column="user_freeze_money" property="userFreezeMoney" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tr_id, tr_money, tr_type, tr_apply_time, tr_apply_status, tr_charge, tr_water_id, 
+    user_money, user_id, user_pay_channel_id, user_company_name, opposit_user_id, opposit_user_pay_channel_id, 
+    opposit_company_name, outcome_bank_name, outcome_bank_account_no, outcome_bank_cnaps, 
+    print_check_code, pay_channel_id, note, replay_time, pay_channel_tr_time, pay_channel_tr_no,user_freeze_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_record
+    where tr_id = #{trId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tr_record
+    where tr_id = #{trId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.TrRecord" >
+    insert into tr_record (tr_id, tr_money, tr_type, 
+      tr_apply_time, tr_apply_status, tr_charge, 
+      tr_water_id, user_money, user_id, 
+      user_pay_channel_id, user_company_name, opposit_user_id, 
+      opposit_user_pay_channel_id, opposit_company_name, 
+      outcome_bank_name, outcome_bank_account_no, 
+      outcome_bank_cnaps, print_check_code, pay_channel_id, 
+      note, replay_time, pay_channel_tr_time, 
+      pay_channel_tr_no,user_freeze_money
+      )
+    values (#{trId,jdbcType=INTEGER}, #{trMoney,jdbcType=DECIMAL}, #{trType,jdbcType=INTEGER}, 
+      #{trApplyTime,jdbcType=VARCHAR}, #{trApplyStatus,jdbcType=INTEGER}, #{trCharge,jdbcType=DECIMAL}, 
+      #{trWaterId,jdbcType=VARCHAR}, #{userMoney,jdbcType=DECIMAL}, #{userId,jdbcType=INTEGER}, 
+      #{userPayChannelId,jdbcType=INTEGER}, #{userCompanyName,jdbcType=VARCHAR}, #{oppositUserId,jdbcType=INTEGER}, 
+      #{oppositUserPayChannelId,jdbcType=INTEGER}, #{oppositCompanyName,jdbcType=VARCHAR}, 
+      #{outcomeBankName,jdbcType=VARCHAR}, #{outcomeBankAccountNo,jdbcType=VARCHAR}, 
+      #{outcomeBankCnaps,jdbcType=VARCHAR}, #{printCheckCode,jdbcType=VARCHAR}, #{payChannelId,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR}, #{replayTime,jdbcType=VARCHAR}, #{payChannelTrTime,jdbcType=VARCHAR}, 
+      #{payChannelTrNo,jdbcType=VARCHAR}, #{userFreezeMoney,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.TrRecord" >
+    insert into tr_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="trMoney != null" >
+        tr_money,
+      </if>
+      <if test="trType != null" >
+        tr_type,
+      </if>
+      <if test="trApplyTime != null" >
+        tr_apply_time,
+      </if>
+      <if test="trApplyStatus != null" >
+        tr_apply_status,
+      </if>
+      <if test="trCharge != null" >
+        tr_charge,
+      </if>
+      <if test="trWaterId != null" >
+        tr_water_id,
+      </if>
+      <if test="userMoney != null" >
+        user_money,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userPayChannelId != null" >
+        user_pay_channel_id,
+      </if>
+      <if test="userCompanyName != null" >
+        user_company_name,
+      </if>
+      <if test="oppositUserId != null" >
+        opposit_user_id,
+      </if>
+      <if test="oppositUserPayChannelId != null" >
+        opposit_user_pay_channel_id,
+      </if>
+      <if test="oppositCompanyName != null" >
+        opposit_company_name,
+      </if>
+      <if test="outcomeBankName != null" >
+        outcome_bank_name,
+      </if>
+      <if test="outcomeBankAccountNo != null" >
+        outcome_bank_account_no,
+      </if>
+      <if test="outcomeBankCnaps != null" >
+        outcome_bank_cnaps,
+      </if>
+      <if test="printCheckCode != null" >
+        print_check_code,
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="replayTime != null" >
+        replay_time,
+      </if>
+      <if test="payChannelTrTime != null" >
+        pay_channel_tr_time,
+      </if>
+      <if test="payChannelTrNo != null" >
+        pay_channel_tr_no,
+      </if>
+      <if test="userFreezeMoney != null" >
+        user_freeze_money
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="trMoney != null" >
+        #{trMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="trType != null" >
+        #{trType,jdbcType=INTEGER},
+      </if>
+      <if test="trApplyTime != null" >
+        #{trApplyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="trApplyStatus != null" >
+        #{trApplyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="trCharge != null" >
+        #{trCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="trWaterId != null" >
+        #{trWaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="userMoney != null" >
+        #{userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPayChannelId != null" >
+        #{userPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="userCompanyName != null" >
+        #{userCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="oppositUserId != null" >
+        #{oppositUserId,jdbcType=INTEGER},
+      </if>
+      <if test="oppositUserPayChannelId != null" >
+        #{oppositUserPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="oppositCompanyName != null" >
+        #{oppositCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomeBankName != null" >
+        #{outcomeBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomeBankAccountNo != null" >
+        #{outcomeBankAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomeBankCnaps != null" >
+        #{outcomeBankCnaps,jdbcType=VARCHAR},
+      </if>
+      <if test="printCheckCode != null" >
+        #{printCheckCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="replayTime != null" >
+        #{replayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelTrTime != null" >
+        #{payChannelTrTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelTrNo != null" >
+        #{payChannelTrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userFreezeMoney != null" >
+         #{userFreezeMoney,jdbcType=DECIMAL}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.TrRecord" >
+    update tr_record
+    <set >
+      <if test="trMoney != null" >
+        tr_money = #{trMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="trType != null" >
+        tr_type = #{trType,jdbcType=INTEGER},
+      </if>
+      <if test="trApplyTime != null" >
+        tr_apply_time = #{trApplyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="trApplyStatus != null" >
+        tr_apply_status = #{trApplyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="trCharge != null" >
+        tr_charge = #{trCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="trWaterId != null" >
+        tr_water_id = #{trWaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="userMoney != null" >
+        user_money = #{userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPayChannelId != null" >
+        user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="userCompanyName != null" >
+        user_company_name = #{userCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="oppositUserId != null" >
+        opposit_user_id = #{oppositUserId,jdbcType=INTEGER},
+      </if>
+      <if test="oppositUserPayChannelId != null" >
+        opposit_user_pay_channel_id = #{oppositUserPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="oppositCompanyName != null" >
+        opposit_company_name = #{oppositCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomeBankName != null" >
+        outcome_bank_name = #{outcomeBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomeBankAccountNo != null" >
+        outcome_bank_account_no = #{outcomeBankAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomeBankCnaps != null" >
+        outcome_bank_cnaps = #{outcomeBankCnaps,jdbcType=VARCHAR},
+      </if>
+      <if test="printCheckCode != null" >
+        print_check_code = #{printCheckCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="replayTime != null" >
+        replay_time = #{replayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelTrTime != null" >
+        pay_channel_tr_time = #{payChannelTrTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelTrNo != null" >
+        pay_channel_tr_no = #{payChannelTrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userFreezeMoney != null" >
+         user_freeze_money=#{userFreezeMoney,jdbcType=DECIMAL}
+      </if>
+    </set>
+    where tr_id = #{trId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.TrRecord" >
+    update tr_record
+    set tr_money = #{trMoney,jdbcType=DECIMAL},
+      tr_type = #{trType,jdbcType=INTEGER},
+      tr_apply_time = #{trApplyTime,jdbcType=VARCHAR},
+      tr_apply_status = #{trApplyStatus,jdbcType=INTEGER},
+      tr_charge = #{trCharge,jdbcType=DECIMAL},
+      tr_water_id = #{trWaterId,jdbcType=VARCHAR},
+      user_money = #{userMoney,jdbcType=DECIMAL},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER},
+      user_company_name = #{userCompanyName,jdbcType=VARCHAR},
+      opposit_user_id = #{oppositUserId,jdbcType=INTEGER},
+      opposit_user_pay_channel_id = #{oppositUserPayChannelId,jdbcType=INTEGER},
+      opposit_company_name = #{oppositCompanyName,jdbcType=VARCHAR},
+      outcome_bank_name = #{outcomeBankName,jdbcType=VARCHAR},
+      outcome_bank_account_no = #{outcomeBankAccountNo,jdbcType=VARCHAR},
+      outcome_bank_cnaps = #{outcomeBankCnaps,jdbcType=VARCHAR},
+      print_check_code = #{printCheckCode,jdbcType=VARCHAR},
+      pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      replay_time = #{replayTime,jdbcType=VARCHAR},
+      pay_channel_tr_time = #{payChannelTrTime,jdbcType=VARCHAR},
+      pay_channel_tr_no = #{payChannelTrNo,jdbcType=VARCHAR},
+      user_freeze_money=#{userFreezeMoney,jdbcType=DECIMAL}
+    where tr_id = #{trId,jdbcType=INTEGER}
+  </update>
+  <!-- 获取最新入金记录时间 -->
+  <select id="queryLastTrRecord" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_record
+    where tr_type=3 and user_id = #{userId,jdbcType=INTEGER}  and  user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER} order by tr_id  desc
+  </select>
+  <!-- 根据柜员交易号是否存在 -->
+  <select id="queryTrRecordByTrNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_record
+    where pay_channel_tr_no = #{payChannelTrNo,jdbcType=INTEGER}
+  </select>
+  <!-- 保存入金记录 -->
+  <insert id="insertList" parameterType="java.util.List">
+    insert into tr_record (tr_money, tr_type, 
+      tr_apply_time, tr_apply_status, tr_charge, 
+      tr_water_id, user_money, user_id, 
+      user_pay_channel_id, user_company_name, opposit_user_id, 
+      opposit_user_pay_channel_id, opposit_company_name, 
+      outcome_bank_name, outcome_bank_account_no, 
+      outcome_bank_cnaps, print_check_code, pay_channel_id, 
+      replay_time,pay_channel_tr_time,pay_channel_tr_no,note,user_freeze_money)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+    	 (#{item.trMoney,jdbcType=DECIMAL}, #{item.trType,jdbcType=INTEGER}, 
+	      #{item.trApplyTime,jdbcType=VARCHAR}, #{item.trApplyStatus,jdbcType=INTEGER}, #{item.trCharge,jdbcType=DECIMAL}, 
+	      #{item.trWaterId,jdbcType=VARCHAR}, #{item.userMoney,jdbcType=DECIMAL}, #{item.userId,jdbcType=INTEGER}, 
+	      #{item.userPayChannelId,jdbcType=INTEGER}, #{item.userCompanyName,jdbcType=VARCHAR}, #{item.oppositUserId,jdbcType=INTEGER}, 
+	      #{item.oppositUserPayChannelId,jdbcType=INTEGER}, #{item.oppositCompanyName,jdbcType=VARCHAR}, 
+	      #{item.outcomeBankName,jdbcType=VARCHAR}, #{item.outcomeBankAccountNo,jdbcType=VARCHAR}, 
+	      #{item.outcomeBankCnaps,jdbcType=VARCHAR}, #{item.printCheckCode,jdbcType=VARCHAR}, #{item.payChannelId,jdbcType=INTEGER}, 
+	      #{item.replayTime,jdbcType=VARCHAR},#{item.payChannelTrTime,jdbcType=VARCHAR},#{item.payChannelTrNo,jdbcType=VARCHAR},
+	      #{item.note,jdbcType=VARCHAR},#{item.userFreezeMoney,jdbcType=DECIMAL})
+      </foreach>
+  </insert>
+  
+  <!-- 查询所有出金请求中记录-->
+  <select id="queryTrRecordType3" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_record
+    where tr_type=2 and tr_apply_status = 0
+  </select>
+  
+  <!-- 查询是否有出金请求中记录 -->
+  <select id="queryApplyStatus" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+    select 
+    	count(*)
+    from tr_record
+    where  user_id = #{userId,jdbcType=INTEGER} and tr_type=2 and  tr_apply_status = 0
+  </select>
+</mapper>

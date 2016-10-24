@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.SCallClientLogMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.SCallClientLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="pay_result" property="payResult" jdbcType="INTEGER" />
+    <result column="payment_record_id" property="paymentRecordId" jdbcType="INTEGER" />
+    <result column="call_time" property="callTime" jdbcType="VARCHAR" />
+    <result column="is_success" property="isSuccess" jdbcType="INTEGER" />
+    <result column="response_time" property="responseTime" jdbcType="VARCHAR" />
+    <result column="notify_url" property="notifyUrl" jdbcType="VARCHAR" />
+    <result column="response_text" property="responseText" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_time, pay_type, pay_result, payment_record_id, call_time, is_success, 
+    response_time,notify_url,response_text
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_call_client_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="findAllListByType" resultMap="BaseResultMap" parameterType="com.smmpay.respository.model.SCallClientLog">
+   select  
+   <include refid="Base_Column_List" />
+    from s_call_client_log
+    where pay_type = #{payType,jdbcType=INTEGER} AND
+    pay_result =#{payResult,jdbcType=INTEGER} AND
+    is_success = #{isSuccess,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_call_client_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.SCallClientLog" >
+    insert into s_call_client_log (id, create_time, pay_type, 
+      pay_result, payment_record_id, call_time, 
+      is_success, response_time, notify_url,response_text)
+    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, 
+      #{payResult,jdbcType=INTEGER}, #{paymentRecordId,jdbcType=INTEGER}, #{callTime,jdbcType=VARCHAR}, 
+      #{isSuccess,jdbcType=INTEGER}, #{responseTime,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}, #{responseText,jdbcType=VARCHAR} )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.SCallClientLog" >
+    insert into s_call_client_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="payResult != null" >
+        pay_result,
+      </if>
+      <if test="paymentRecordId != null" >
+        payment_record_id,
+      </if>
+      <if test="callTime != null" >
+        call_time,
+      </if>
+      <if test="isSuccess != null" >
+        is_success,
+      </if>
+      <if test="responseTime != null" >
+        response_time,
+      </if>
+      <if test="notifyUrl != null" >
+        notify_url,
+      </if>
+      <if test="responseText != null" >
+        response_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payResult != null" >
+        #{payResult,jdbcType=INTEGER},
+      </if>
+      <if test="paymentRecordId != null" >
+        #{paymentRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="callTime != null" >
+        #{callTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuccess != null" >
+        #{isSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="responseTime != null" >
+        #{responseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+       <if test="responseText != null" >
+        #{response_text,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.SCallClientLog" >
+    update s_call_client_log
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payResult != null" >
+        pay_result = #{payResult,jdbcType=INTEGER},
+      </if>
+      <if test="paymentRecordId != null" >
+        payment_record_id = #{paymentRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="callTime != null" >
+        call_time = #{callTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuccess != null" >
+        is_success = #{isSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="responseTime != null" >
+        response_time = #{responseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        notify_url = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="responseText != null" >
+        response_text = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.SCallClientLog" >
+    update s_call_client_log
+    set create_time = #{createTime,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=INTEGER},
+      pay_result = #{payResult,jdbcType=INTEGER},
+      payment_record_id = #{paymentRecordId,jdbcType=INTEGER},
+      call_time = #{callTime,jdbcType=VARCHAR},
+      is_success = #{isSuccess,jdbcType=INTEGER},
+      response_time = #{responseTime,jdbcType=VARCHAR},
+      notify_url = #{notifyUrl,jdbcType=VARCHAR},
+      response_text = #{responseText,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

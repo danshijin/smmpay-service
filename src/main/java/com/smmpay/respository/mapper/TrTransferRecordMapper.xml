@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.TrTransferRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.TrTransferRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="client_id" property="clientId" jdbcType="VARCHAR" />
+    <result column="payment_id" property="paymentId" jdbcType="INTEGER" />
+    <result column="pay_channel_id" property="payChannelId" jdbcType="INTEGER" />
+    <result column="out_user_id" property="outUserId" jdbcType="INTEGER" />
+    <result column="out_user_company_name" property="outUserCompanyName" jdbcType="VARCHAR" />
+    <result column="out_user_channel_id" property="outUserChannelId" jdbcType="INTEGER" />
+    <result column="in_user_id" property="inUserId" jdbcType="INTEGER" />
+    <result column="in_user_company_name" property="inUserCompanyName" jdbcType="VARCHAR" />
+    <result column="in_user_channel_id" property="inUserChannelId" jdbcType="INTEGER" />
+    <result column="apply_time" property="applyTime" jdbcType="VARCHAR" />
+    <result column="response_time" property="responseTime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="'desc'" property="desc" jdbcType="VARCHAR" />
+    <result column="verify_code" property="verifyCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, client_id, payment_id, pay_channel_id, out_user_id, out_user_company_name, out_user_channel_id, 
+    in_user_id, in_user_company_name, in_user_channel_id, apply_time, response_time, 
+    status,'desc',verify_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_transfer_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tr_transfer_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.TrTransferRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into tr_transfer_record (client_id, payment_id, 
+      pay_channel_id, out_user_id, out_user_company_name, 
+      out_user_channel_id, in_user_id, in_user_company_name, 
+      in_user_channel_id, apply_time, response_time, 
+      status,verify_code)
+    values (#{clientId,jdbcType=VARCHAR}, #{paymentId,jdbcType=INTEGER}, 
+      #{payChannelId,jdbcType=INTEGER}, #{outUserId,jdbcType=INTEGER}, #{outUserCompanyName,jdbcType=VARCHAR}, 
+      #{outUserChannelId,jdbcType=INTEGER}, #{inUserId,jdbcType=INTEGER}, #{inUserCompanyName,jdbcType=VARCHAR}, 
+      #{inUserChannelId,jdbcType=INTEGER}, #{applyTime,jdbcType=VARCHAR}, #{responseTime,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER},#{verifyCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.TrTransferRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into tr_transfer_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="clientId != null" >
+        client_id,
+      </if>
+      <if test="paymentId != null" >
+        payment_id,
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id,
+      </if>
+      <if test="outUserId != null" >
+        out_user_id,
+      </if>
+      <if test="outUserCompanyName != null" >
+        out_user_company_name,
+      </if>
+      <if test="outUserChannelId != null" >
+        out_user_channel_id,
+      </if>
+      <if test="inUserId != null" >
+        in_user_id,
+      </if>
+      <if test="inUserCompanyName != null" >
+        in_user_company_name,
+      </if>
+      <if test="inUserChannelId != null" >
+        in_user_channel_id,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="responseTime != null" >
+        response_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+       <if test="verifyCode != null" >
+        verify_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentId != null" >
+        #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelId != null" >
+        #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="outUserId != null" >
+        #{outUserId,jdbcType=INTEGER},
+      </if>
+      <if test="outUserCompanyName != null" >
+        #{outUserCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="outUserChannelId != null" >
+        #{outUserChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="inUserId != null" >
+        #{inUserId,jdbcType=INTEGER},
+      </if>
+      <if test="inUserCompanyName != null" >
+        #{inUserCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="inUserChannelId != null" >
+        #{inUserChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="responseTime != null" >
+        #{responseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="verifyCode != null" >
+        #{verifyCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.TrTransferRecord" >
+    update tr_transfer_record
+    <set >
+      <if test="clientId != null" >
+        client_id = #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentId != null" >
+        payment_id = #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="outUserId != null" >
+        out_user_id = #{outUserId,jdbcType=INTEGER},
+      </if>
+      <if test="outUserCompanyName != null" >
+        out_user_company_name = #{outUserCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="outUserChannelId != null" >
+        out_user_channel_id = #{outUserChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="inUserId != null" >
+        in_user_id = #{inUserId,jdbcType=INTEGER},
+      </if>
+      <if test="inUserCompanyName != null" >
+        in_user_company_name = #{inUserCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="inUserChannelId != null" >
+        in_user_channel_id = #{inUserChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="responseTime != null" >
+        response_time = #{responseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null" >
+        `desc` = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyCode != null" >
+        verify_code = #{verifyCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.TrTransferRecord" >
+    update tr_transfer_record
+    set client_id = #{clientId,jdbcType=VARCHAR},
+      payment_id = #{paymentId,jdbcType=INTEGER},
+      pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      out_user_id = #{outUserId,jdbcType=INTEGER},
+      out_user_company_name = #{outUserCompanyName,jdbcType=VARCHAR},
+      out_user_channel_id = #{outUserChannelId,jdbcType=INTEGER},
+      in_user_id = #{inUserId,jdbcType=INTEGER},
+      in_user_company_name = #{inUserCompanyName,jdbcType=VARCHAR},
+      in_user_channel_id = #{inUserChannelId,jdbcType=INTEGER},
+      apply_time = #{applyTime,jdbcType=VARCHAR},
+      response_time = #{responseTime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+     
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="queryStatus" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+    select 
+    count(*)
+    from tr_transfer_record
+    where out_user_id = #{userId,jdbcType=INTEGER} and status=0
+  </select>
+  <select id="queryList" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tr_transfer_record
+    where status = 0
+  </select>
+  <select id="queryTrRecordByFailure" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tr_transfer_record
+    where payment_id = #{paymentId,jdbcType=INTEGER} and status=2
+  </select>
+</mapper>

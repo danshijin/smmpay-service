@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.TrCashApplyRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.TrCashApplyRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cash_apply_id" property="cashApplyId" jdbcType="INTEGER" />
+    <result column="cash_bank_id" property="cashBankId" jdbcType="INTEGER" />
+    <result column="counter_fee" property="counterFee" jdbcType="DECIMAL" />
+    <result column="cash_money" property="cashMoney" jdbcType="DECIMAL" />
+    <result column="cash_bank_no" property="cashBankNo" jdbcType="VARCHAR" />
+    <result column="cash_bank_name" property="cashBankName" jdbcType="VARCHAR" />
+    <result column="cash_bank_cnaps" property="cashBankCnaps" jdbcType="VARCHAR" />
+    <result column="cash_type" property="cashType" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_company_name" property="userCompanyName" jdbcType="VARCHAR" />
+    <result column="user_use_money" property="userUseMoney" jdbcType="DECIMAL" />
+    <result column="user_freeze_money" property="userFreezeMoney" jdbcType="DECIMAL" />
+    <result column="client_id" property="clientId" jdbcType="VARCHAR" />
+    <result column="apply_time" property="applyTime" jdbcType="VARCHAR" />
+    <result column="replay_time" property="replayTime" jdbcType="VARCHAR" />
+    <result column="apply_status" property="applyStatus" jdbcType="INTEGER" />
+    <result column="replay_msg" property="replayMsg" jdbcType="VARCHAR" />
+    <result column="pay_channel_id" property="payChannelId" jdbcType="INTEGER" />
+    <result column="pay_channel_user_account" property="payChannelUserAccount" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cash_apply_id, cash_bank_id, counter_fee, cash_money, cash_bank_no, cash_bank_name, 
+    cash_bank_cnaps, cash_type, user_id, user_email, user_company_name, user_use_money, 
+    user_freeze_money, client_id, apply_time, replay_time, apply_status, replay_msg, 
+    pay_channel_id, pay_channel_user_account
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_cash_apply_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tr_cash_apply_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.TrCashApplyRecord" >
+    insert into tr_cash_apply_record (id, cash_apply_id, cash_bank_id, 
+      counter_fee, cash_money, cash_bank_no, 
+      cash_bank_name, cash_bank_cnaps, cash_type, 
+      user_id, user_email, user_company_name, 
+      user_use_money, user_freeze_money, client_id, 
+      apply_time, replay_time, apply_status, 
+      replay_msg, pay_channel_id, pay_channel_user_account
+      )
+    values (#{id,jdbcType=INTEGER}, #{cashApplyId,jdbcType=INTEGER}, #{cashBankId,jdbcType=INTEGER}, 
+      #{counterFee,jdbcType=DECIMAL}, #{cashMoney,jdbcType=DECIMAL}, #{cashBankNo,jdbcType=VARCHAR}, 
+      #{cashBankName,jdbcType=VARCHAR}, #{cashBankCnaps,jdbcType=VARCHAR}, #{cashType,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{userEmail,jdbcType=VARCHAR}, #{userCompanyName,jdbcType=VARCHAR}, 
+      #{userUseMoney,jdbcType=DECIMAL}, #{userFreezeMoney,jdbcType=DECIMAL}, #{clientId,jdbcType=VARCHAR}, 
+      #{applyTime,jdbcType=VARCHAR}, #{replayTime,jdbcType=VARCHAR}, #{applyStatus,jdbcType=INTEGER}, 
+      #{replayMsg,jdbcType=VARCHAR}, #{payChannelId,jdbcType=INTEGER}, #{payChannelUserAccount,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.TrCashApplyRecord" >
+    insert into tr_cash_apply_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cashApplyId != null" >
+        cash_apply_id,
+      </if>
+      <if test="cashBankId != null" >
+        cash_bank_id,
+      </if>
+      <if test="counterFee != null" >
+        counter_fee,
+      </if>
+      <if test="cashMoney != null" >
+        cash_money,
+      </if>
+      <if test="cashBankNo != null" >
+        cash_bank_no,
+      </if>
+      <if test="cashBankName != null" >
+        cash_bank_name,
+      </if>
+      <if test="cashBankCnaps != null" >
+        cash_bank_cnaps,
+      </if>
+      <if test="cashType != null" >
+        cash_type,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="userCompanyName != null" >
+        user_company_name,
+      </if>
+      <if test="userUseMoney != null" >
+        user_use_money,
+      </if>
+      <if test="userFreezeMoney != null" >
+        user_freeze_money,
+      </if>
+      <if test="clientId != null" >
+        client_id,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="replayTime != null" >
+        replay_time,
+      </if>
+      <if test="applyStatus != null" >
+        apply_status,
+      </if>
+      <if test="replayMsg != null" >
+        replay_msg,
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id,
+      </if>
+      <if test="payChannelUserAccount != null" >
+        pay_channel_user_account,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cashApplyId != null" >
+        #{cashApplyId,jdbcType=INTEGER},
+      </if>
+      <if test="cashBankId != null" >
+        #{cashBankId,jdbcType=INTEGER},
+      </if>
+      <if test="counterFee != null" >
+        #{counterFee,jdbcType=DECIMAL},
+      </if>
+      <if test="cashMoney != null" >
+        #{cashMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cashBankNo != null" >
+        #{cashBankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cashBankName != null" >
+        #{cashBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="cashBankCnaps != null" >
+        #{cashBankCnaps,jdbcType=VARCHAR},
+      </if>
+      <if test="cashType != null" >
+        #{cashType,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userCompanyName != null" >
+        #{userCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="userUseMoney != null" >
+        #{userUseMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="userFreezeMoney != null" >
+        #{userFreezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="replayTime != null" >
+        #{replayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="applyStatus != null" >
+        #{applyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="replayMsg != null" >
+        #{replayMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelUserAccount != null" >
+        #{payChannelUserAccount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.TrCashApplyRecord" >
+    update tr_cash_apply_record
+    <set >
+      <if test="cashApplyId != null" >
+        cash_apply_id = #{cashApplyId,jdbcType=INTEGER},
+      </if>
+      <if test="cashBankId != null" >
+        cash_bank_id = #{cashBankId,jdbcType=INTEGER},
+      </if>
+      <if test="counterFee != null" >
+        counter_fee = #{counterFee,jdbcType=DECIMAL},
+      </if>
+      <if test="cashMoney != null" >
+        cash_money = #{cashMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cashBankNo != null" >
+        cash_bank_no = #{cashBankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cashBankName != null" >
+        cash_bank_name = #{cashBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="cashBankCnaps != null" >
+        cash_bank_cnaps = #{cashBankCnaps,jdbcType=VARCHAR},
+      </if>
+      <if test="cashType != null" >
+        cash_type = #{cashType,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userCompanyName != null" >
+        user_company_name = #{userCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="userUseMoney != null" >
+        user_use_money = #{userUseMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="userFreezeMoney != null" >
+        user_freeze_money = #{userFreezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="clientId != null" >
+        client_id = #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="replayTime != null" >
+        replay_time = #{replayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="applyStatus != null" >
+        apply_status = #{applyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="replayMsg != null" >
+        replay_msg = #{replayMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelUserAccount != null" >
+        pay_channel_user_account = #{payChannelUserAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.TrCashApplyRecord" >
+    update tr_cash_apply_record
+    set cash_apply_id = #{cashApplyId,jdbcType=INTEGER},
+      cash_bank_id = #{cashBankId,jdbcType=INTEGER},
+      counter_fee = #{counterFee,jdbcType=DECIMAL},
+      cash_money = #{cashMoney,jdbcType=DECIMAL},
+      cash_bank_no = #{cashBankNo,jdbcType=VARCHAR},
+      cash_bank_name = #{cashBankName,jdbcType=VARCHAR},
+      cash_bank_cnaps = #{cashBankCnaps,jdbcType=VARCHAR},
+      cash_type = #{cashType,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_company_name = #{userCompanyName,jdbcType=VARCHAR},
+      user_use_money = #{userUseMoney,jdbcType=DECIMAL},
+      user_freeze_money = #{userFreezeMoney,jdbcType=DECIMAL},
+      client_id = #{clientId,jdbcType=VARCHAR},
+      apply_time = #{applyTime,jdbcType=VARCHAR},
+      replay_time = #{replayTime,jdbcType=VARCHAR},
+      apply_status = #{applyStatus,jdbcType=INTEGER},
+      replay_msg = #{replayMsg,jdbcType=VARCHAR},
+      pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      pay_channel_user_account = #{payChannelUserAccount,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tr_cash_apply_record
+    where apply_status = #{status,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByCashApplyId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(id) FROM tr_cash_apply_record where cash_apply_id = #{cashApplyId,jdbcType=INTEGER} AND apply_status != 3
+  </select>
+  
+  <select id="queryCashApplyRecordByStatus" resultType="java.lang.Integer" parameterType="com.smmpay.respository.model.TrCashApply" >
+    select count(*) from tr_cash_apply_record where apply_status = #{applyStatus,jdbcType=INTEGER} and user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="countRecordByUserIdAndStatus" resultType="java.lang.Integer" >
+    select count(id) from tr_cash_apply_record where user_id = #{userId, jdbcType=INTEGER} and apply_status = 1;
+  </select>
+</mapper>

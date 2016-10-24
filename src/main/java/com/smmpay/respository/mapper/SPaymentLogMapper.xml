@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.SPaymentLogMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.SPaymentLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="payment_id" property="paymentId" jdbcType="INTEGER" />
+    <result column="operation_name" property="operationName" jdbcType="VARCHAR" />
+    <result column="operation_time" property="operationTime" jdbcType="VARCHAR" />
+    <result column="operation_result" property="operationResult" jdbcType="VARCHAR" />
+    <result column="opetation_desc" property="opetationDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, payment_id, operation_name, operation_time, operation_result, opetation_desc, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_payment_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_payment_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.SPaymentLog" >
+    insert into s_payment_log (id, payment_id, operation_name, 
+      operation_time, operation_result, opetation_desc, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{paymentId,jdbcType=INTEGER}, #{operationName,jdbcType=VARCHAR}, 
+      #{operationTime,jdbcType=VARCHAR}, #{operationResult,jdbcType=VARCHAR}, #{opetationDesc,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.SPaymentLog" >
+    insert into s_payment_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="paymentId != null" >
+        payment_id,
+      </if>
+      <if test="operationName != null" >
+        operation_name,
+      </if>
+      <if test="operationTime != null" >
+        operation_time,
+      </if>
+      <if test="operationResult != null" >
+        operation_result,
+      </if>
+      <if test="opetationDesc != null" >
+        opetation_desc,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="paymentId != null" >
+        #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="operationName != null" >
+        #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        #{operationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="operationResult != null" >
+        #{operationResult,jdbcType=VARCHAR},
+      </if>
+      <if test="opetationDesc != null" >
+        #{opetationDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.SPaymentLog" >
+    update s_payment_log
+    <set >
+      <if test="paymentId != null" >
+        payment_id = #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="operationName != null" >
+        operation_name = #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        operation_time = #{operationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="operationResult != null" >
+        operation_result = #{operationResult,jdbcType=VARCHAR},
+      </if>
+      <if test="opetationDesc != null" >
+        opetation_desc = #{opetationDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.SPaymentLog" >
+    update s_payment_log
+    set payment_id = #{paymentId,jdbcType=INTEGER},
+      operation_name = #{operationName,jdbcType=VARCHAR},
+      operation_time = #{operationTime,jdbcType=VARCHAR},
+      operation_result = #{operationResult,jdbcType=VARCHAR},
+      opetation_desc = #{opetationDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

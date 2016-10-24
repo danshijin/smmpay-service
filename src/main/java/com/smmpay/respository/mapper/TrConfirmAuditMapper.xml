@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.TrConfirmAuditMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.TrConfirmAudit" >
+    <id column="confirm_id" property="confirmId" jdbcType="INTEGER" />
+    <result column="payment_id" property="paymentId" jdbcType="INTEGER" />
+    <result column="apply_time" property="applyTime" jdbcType="VARCHAR" />
+    <result column="mall_audit_time" property="mallAuditTime" jdbcType="VARCHAR" />
+    <result column="mall_audit_status" property="mallAuditStatus" jdbcType="CHAR" />
+    <result column="mall_audit_reason" property="mallAuditReason" jdbcType="VARCHAR" />
+    <result column="audit_user_id" property="auditUserId" jdbcType="INTEGER" />
+    <result column="audit_time" property="auditTime" jdbcType="VARCHAR" />
+    <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    confirm_id, payment_id, apply_time, mall_audit_time, mall_audit_status, mall_audit_reason, 
+    audit_user_id, audit_time, audit_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_confirm_audit
+    where confirm_id = #{confirmId,jdbcType=INTEGER}
+  </select>
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.smmpay.respository.model.TrConfirmAudit" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_confirm_audit
+    where 1=1
+    <if test="confirmId != null">
+       AND confirm_id = #{confirmId,jdbcType=INTEGER}
+    </if>
+    <if test="paymentId != null">
+       AND payment_id = #{paymentId,jdbcType=INTEGER}
+    </if>
+    <if test="auditStatus != null">
+       AND audit_status = #{auditStatus,jdbcType=INTEGER}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tr_confirm_audit
+    where confirm_id = #{confirmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.TrConfirmAudit" >
+    insert into tr_confirm_audit (confirm_id, payment_id, apply_time, 
+      mall_audit_time, mall_audit_status, mall_audit_reason, 
+      audit_user_id, audit_time, audit_status
+      )
+    values (#{confirmId,jdbcType=INTEGER}, #{paymentId,jdbcType=INTEGER}, #{applyTime,jdbcType=TIMESTAMP}, 
+      #{mallAuditTime,jdbcType=TIMESTAMP}, #{mallAuditStatus,jdbcType=CHAR}, #{mallAuditReason,jdbcType=VARCHAR}, 
+      #{auditUserId,jdbcType=INTEGER}, #{auditTime,jdbcType=TIMESTAMP}, #{auditStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.TrConfirmAudit" >
+    insert into tr_confirm_audit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="confirmId != null" >
+        confirm_id,
+      </if>
+      <if test="paymentId != null" >
+        payment_id,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="mallAuditTime != null" >
+        mall_audit_time,
+      </if>
+      <if test="mallAuditStatus != null" >
+        mall_audit_status,
+      </if>
+      <if test="mallAuditReason != null" >
+        mall_audit_reason,
+      </if>
+      <if test="auditUserId != null" >
+        audit_user_id,
+      </if>
+      <if test="auditTime != null" >
+        audit_time,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="confirmId != null" >
+        #{confirmId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentId != null" >
+        #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mallAuditTime != null" >
+        #{mallAuditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mallAuditStatus != null" >
+        #{mallAuditStatus,jdbcType=CHAR},
+      </if>
+      <if test="mallAuditReason != null" >
+        #{mallAuditReason,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserId != null" >
+        #{auditUserId,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.TrConfirmAudit" >
+    update tr_confirm_audit
+    <set >
+     
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mallAuditTime != null" >
+        mall_audit_time = #{mallAuditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mallAuditStatus != null" >
+        mall_audit_status = #{mallAuditStatus,jdbcType=CHAR},
+      </if>
+      <if test="mallAuditReason != null" >
+        mall_audit_reason = #{mallAuditReason,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserId != null" >
+        audit_user_id = #{auditUserId,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where confirm_id = #{confirmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.TrConfirmAudit" >
+    update tr_confirm_audit
+    set payment_id = #{paymentId,jdbcType=INTEGER},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      mall_audit_time = #{mallAuditTime,jdbcType=TIMESTAMP},
+      mall_audit_status = #{mallAuditStatus,jdbcType=CHAR},
+      mall_audit_reason = #{mallAuditReason,jdbcType=VARCHAR},
+      audit_user_id = #{auditUserId,jdbcType=INTEGER},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      audit_status = #{auditStatus,jdbcType=INTEGER}
+    where confirm_id = #{confirmId,jdbcType=INTEGER}
+  </update>
+</mapper>

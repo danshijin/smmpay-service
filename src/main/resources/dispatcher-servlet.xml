@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+			http://www.springframework.org/schema/util 
+            http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+
+	<!-- 默认扫描的包路径 -->
+	<context:component-scan base-package="com.smmpay" />
+	<!-- 引入配置文件 -->
+	<util:properties id="ysw" location="classpath:ysw.properties"></util:properties>
+	<util:properties id="common" location="classpath:common.properties"></util:properties>
+	
+	<!-- 用于将对象转换为 JSON -->
+	<bean id="stringConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="jsonConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="stringConverter" />
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!--============================撮合系统数据库开始============================ -->
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" >
+		<!-- 基本属性 -->
+		<property name="url" value="jdbc:mysql://172.16.9.22:3306/smmpay" />
+		<property name="username" value="root" />
+		<property name="password" value="123456" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<!-- 初始化连接 -->  
+        <property name="initialSize" value="10"/> 
+        <!-- 最小空闲连接 -->        
+        <property name="minIdle" value="5"/>    
+        <!-- 最大空闲连接 -->      
+		<property name="maxIdle" value="20"/> 
+		<!-- 最大连接数量  -->
+		<property name="maxActive" value="50"/> 
+		<!-- 是否在自动回收超时连接的时候打印连接的超时错误 -->
+		<property name="logAbandoned" value="false"/>
+		<!-- 是否自动回收超时连接   -->
+		<property name="removeAbandoned" value="true"/>
+		<!--超时时间(以秒数为单位)    -->
+		<property name="removeAbandonedTimeout" value="180"/>
+		<!-- 超时等待时间以毫秒为单位 6000毫秒/1000等于60秒 -->
+		<property name="maxWait" value="1000"/>
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 映射文件集合 -->
+		<property name="mapperLocations" value="classpath:com/smmpay/respository/*/*.xml" />
+		<!--自动加载实体类 -->
+		<property name="typeAliasesPackage" value="com.smmpay.respository.model" />
+		
+		<property name="configurationProperties">
+			<props>
+				<prop key="cacheEnabled">true</prop> 
+				<!-- 查询时，关闭关联对象即时加载以提高性能 -->
+				<prop key="lazyLoadingEnabled">true</prop>
+				 <!-- 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能 -->
+				 <prop key="aggressiveLazyLoading">false</prop>
+				 <!-- 对于未知的SQL查询，允许返回不同的结果集以达到通用的效果 -->  
+				 <prop key="multipleResultSetsEnabled">true</prop>
+				 <!-- 允许使用列标签代替列名 -->  
+				 <prop key="useColumnLabel">true</prop>
+                <!-- 允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值)，数据表的PK生成策略将被覆盖 -->  
+                <prop key="useGeneratedKeys">true</prop>
+                <!-- 给予被嵌套的resultMap以字段-属性的映射支持 -->  
+                <prop key="autoMappingBehavior">FULL</prop>
+                <!-- 对于批量更新操作缓存SQL以提高性能  -->  
+                <prop key="defaultExecutorType">BATCH</prop>
+                <!-- 数据库超过25000秒仍未响应则超时 -->  
+                <prop key="defaultStatementTimeout">25000</prop>
+			</props>
+		</property>
+	</bean>
+	<!--配置自动扫描mapper文件 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<property name="basePackage" value="com.smmpay.respository.dao" />
+	</bean>
+
+	<!--配置事物管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>

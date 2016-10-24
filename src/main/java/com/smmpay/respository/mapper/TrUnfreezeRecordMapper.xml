@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.TrUnfreezeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.TrUnfreezeRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="freeze_id" property="freezeId" jdbcType="INTEGER" />
+    <result column="unfreeze_apply_time" property="unfreezeApplyTime" jdbcType="VARCHAR" />
+    <result column="unfreeze_reply_time" property="unfreezeReplyTime" jdbcType="VARCHAR" />
+    <result column="unfreeze_status" property="unfreezeStatus" jdbcType="INTEGER" />
+    <result column="recevie_user_id" property="recevieUserId" jdbcType="INTEGER" />
+    <result column="recevie_user_name" property="recevieUserName" jdbcType="VARCHAR" />
+    <result column="recevie_user_pay_channel_id" property="recevieUserPayChannelId" jdbcType="INTEGER" />
+    <result column="unfreeze_note" property="unfreezeNote" jdbcType="VARCHAR" />
+    <result column="pay_channel_id" property="payChannelId" jdbcType="INTEGER" />
+    <result column="unfreeze_user_money" property="unfreezeUserMoney" jdbcType="DECIMAL" />
+    <result column="unfreeze_user_freeze_money" property="unfreezeUserFreezeMoney" jdbcType="DECIMAL" />
+    <result column="unfreeze_client_id" property="unfreezeClientId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, freeze_id, unfreeze_apply_time, unfreeze_reply_time, unfreeze_status, recevie_user_id, 
+    recevie_user_name, recevie_user_pay_channel_id, unfreeze_note, pay_channel_id, unfreeze_user_money, 
+    unfreeze_user_freeze_money, unfreeze_client_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_unfreeze_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tr_unfreeze_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.TrUnfreezeRecord" >
+    insert into tr_unfreeze_record (id, freeze_id, unfreeze_apply_time, 
+      unfreeze_reply_time, unfreeze_status, recevie_user_id, 
+      recevie_user_name, recevie_user_pay_channel_id, 
+      unfreeze_note, pay_channel_id, unfreeze_user_money, 
+      unfreeze_user_freeze_money, unfreeze_client_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{freezeId,jdbcType=INTEGER}, #{unfreezeApplyTime,jdbcType=VARCHAR}, 
+      #{unfreezeReplyTime,jdbcType=VARCHAR}, #{unfreezeStatus,jdbcType=INTEGER}, #{recevieUserId,jdbcType=INTEGER}, 
+      #{recevieUserName,jdbcType=VARCHAR}, #{recevieUserPayChannelId,jdbcType=INTEGER}, 
+      #{unfreezeNote,jdbcType=VARCHAR}, #{payChannelId,jdbcType=INTEGER}, #{unfreezeUserMoney,jdbcType=DECIMAL}, 
+      #{unfreezeUserFreezeMoney,jdbcType=DECIMAL}, #{unfreezeClientId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.TrUnfreezeRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into tr_unfreeze_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="freezeId != null" >
+        freeze_id,
+      </if>
+      <if test="unfreezeApplyTime != null" >
+        unfreeze_apply_time,
+      </if>
+      <if test="unfreezeReplyTime != null" >
+        unfreeze_reply_time,
+      </if>
+      <if test="unfreezeStatus != null" >
+        unfreeze_status,
+      </if>
+      <if test="recevieUserId != null" >
+        recevie_user_id,
+      </if>
+      <if test="recevieUserName != null" >
+        recevie_user_name,
+      </if>
+      <if test="recevieUserPayChannelId != null" >
+        recevie_user_pay_channel_id,
+      </if>
+      <if test="unfreezeNote != null" >
+        unfreeze_note,
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id,
+      </if>
+      <if test="unfreezeUserMoney != null" >
+        unfreeze_user_money,
+      </if>
+      <if test="unfreezeUserFreezeMoney != null" >
+        unfreeze_user_freeze_money,
+      </if>
+      <if test="unfreezeClientId != null" >
+        unfreeze_client_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="freezeId != null" >
+        #{freezeId,jdbcType=INTEGER},
+      </if>
+      <if test="unfreezeApplyTime != null" >
+        #{unfreezeApplyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="unfreezeReplyTime != null" >
+        #{unfreezeReplyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="unfreezeStatus != null" >
+        #{unfreezeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="recevieUserId != null" >
+        #{recevieUserId,jdbcType=INTEGER},
+      </if>
+      <if test="recevieUserName != null" >
+        #{recevieUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="recevieUserPayChannelId != null" >
+        #{recevieUserPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="unfreezeNote != null" >
+        #{unfreezeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="unfreezeUserMoney != null" >
+        #{unfreezeUserMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="unfreezeUserFreezeMoney != null" >
+        #{unfreezeUserFreezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="unfreezeClientId != null" >
+        #{unfreezeClientId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.TrUnfreezeRecord" >
+    update tr_unfreeze_record
+    <set >
+      <if test="freezeId != null" >
+        freeze_id = #{freezeId,jdbcType=INTEGER},
+      </if>
+      <if test="unfreezeApplyTime != null" >
+        unfreeze_apply_time = #{unfreezeApplyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="unfreezeReplyTime != null" >
+        unfreeze_reply_time = #{unfreezeReplyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="unfreezeStatus != null" >
+        unfreeze_status = #{unfreezeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="recevieUserId != null" >
+        recevie_user_id = #{recevieUserId,jdbcType=INTEGER},
+      </if>
+      <if test="recevieUserName != null" >
+        recevie_user_name = #{recevieUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="recevieUserPayChannelId != null" >
+        recevie_user_pay_channel_id = #{recevieUserPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="unfreezeNote != null" >
+        unfreeze_note = #{unfreezeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="unfreezeUserMoney != null" >
+        unfreeze_user_money = #{unfreezeUserMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="unfreezeUserFreezeMoney != null" >
+        unfreeze_user_freeze_money = #{unfreezeUserFreezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="unfreezeClientId != null" >
+        unfreeze_client_id = #{unfreezeClientId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.TrUnfreezeRecord" >
+    update tr_unfreeze_record
+    set freeze_id = #{freezeId,jdbcType=INTEGER},
+      unfreeze_apply_time = #{unfreezeApplyTime,jdbcType=VARCHAR},
+      unfreeze_reply_time = #{unfreezeReplyTime,jdbcType=VARCHAR},
+      unfreeze_status = #{unfreezeStatus,jdbcType=INTEGER},
+      recevie_user_id = #{recevieUserId,jdbcType=INTEGER},
+      recevie_user_name = #{recevieUserName,jdbcType=VARCHAR},
+      recevie_user_pay_channel_id = #{recevieUserPayChannelId,jdbcType=INTEGER},
+      unfreeze_note = #{unfreezeNote,jdbcType=VARCHAR},
+      pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      unfreeze_user_money = #{unfreezeUserMoney,jdbcType=DECIMAL},
+      unfreeze_user_freeze_money = #{unfreezeUserFreezeMoney,jdbcType=DECIMAL},
+      unfreeze_client_id = #{unfreezeClientId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 获取所有请求中的解冻记录 -->
+  <select id="queryUnfreezeRecordAll" resultMap="BaseResultMap"  parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_unfreeze_record
+    where unfreeze_status=0
+  </select>
+  <!-- 修改解冻状态 -->
+  <update id="updateUNFreezeStatus" parameterType="com.smmpay.respository.model.TrUnfreezeRecord" >
+    update tr_unfreeze_record
+    	set unfreeze_status = #{unfreezeStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="queryUNFreezeStatus" resultType="java.lang.Integer" parameterType="java.util.HashMap" >
+    select 
+    	count(*)
+    	from tr_unfreeze_record
+    where recevie_user_id = #{sellerUserId,jdbcType=INTEGER} and unfreeze_status=0
+  </select>
+  <update id="addVeriyCode" >
+  	update tr_unfreeze_record set verify_code = #{verifyCode} where id = #{id}
+  </update>
+  <select id="getVerify" parameterType="int" resultType="java.lang.String">
+  	select verify_code from tr_unfreeze_record where id = #{id}
+  </select>
+</mapper>

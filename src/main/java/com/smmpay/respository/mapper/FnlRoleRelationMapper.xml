@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.FnlRoleRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.FnlRoleRelation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="roleId" property="roleid" jdbcType="INTEGER" />
+    <result column="roleName" property="rolename" jdbcType="VARCHAR" />
+    <result column="mainMenu" property="mainmenu" jdbcType="VARCHAR" />
+    <result column="subMenu" property="submenu" jdbcType="VARCHAR" />
+    <result column="childMenu" property="childmenu" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roleId, roleName, mainMenu, subMenu, childMenu
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fnl_role_relation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fnl_role_relation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.FnlRoleRelation" >
+    insert into fnl_role_relation (id, roleId, roleName, 
+      mainMenu, subMenu, childMenu
+      )
+    values (#{id,jdbcType=INTEGER}, #{roleid,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, 
+      #{mainmenu,jdbcType=VARCHAR}, #{submenu,jdbcType=VARCHAR}, #{childmenu,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.FnlRoleRelation" >
+    insert into fnl_role_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleid != null" >
+        roleId,
+      </if>
+      <if test="rolename != null" >
+        roleName,
+      </if>
+      <if test="mainmenu != null" >
+        mainMenu,
+      </if>
+      <if test="submenu != null" >
+        subMenu,
+      </if>
+      <if test="childmenu != null" >
+        childMenu,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="rolename != null" >
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="mainmenu != null" >
+        #{mainmenu,jdbcType=VARCHAR},
+      </if>
+      <if test="submenu != null" >
+        #{submenu,jdbcType=VARCHAR},
+      </if>
+      <if test="childmenu != null" >
+        #{childmenu,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.FnlRoleRelation" >
+    update fnl_role_relation
+    <set >
+      <if test="roleid != null" >
+        roleId = #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="rolename != null" >
+        roleName = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="mainmenu != null" >
+        mainMenu = #{mainmenu,jdbcType=VARCHAR},
+      </if>
+      <if test="submenu != null" >
+        subMenu = #{submenu,jdbcType=VARCHAR},
+      </if>
+      <if test="childmenu != null" >
+        childMenu = #{childmenu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.FnlRoleRelation" >
+    update fnl_role_relation
+    set roleId = #{roleid,jdbcType=INTEGER},
+      roleName = #{rolename,jdbcType=VARCHAR},
+      mainMenu = #{mainmenu,jdbcType=VARCHAR},
+      subMenu = #{submenu,jdbcType=VARCHAR},
+      childMenu = #{childmenu,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

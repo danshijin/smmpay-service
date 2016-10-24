@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.SBankLogMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.SBankLog" >
+    <id column="log_id" property="logId" jdbcType="INTEGER" />
+    <result column="request_param" property="requestParam" jdbcType="VARCHAR" />
+    <result column="request_interface" property="requestInterface" jdbcType="VARCHAR" />
+    <result column="apply_time" property="applyTime" jdbcType="VARCHAR" />
+    <result column="pay_channel_id" property="payChannelId" jdbcType="INTEGER" />
+    <result column="reply_status" property="replyStatus" jdbcType="INTEGER" />
+    <result column="reply_text" property="replyText" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    log_id, request_param, request_interface, apply_time, pay_channel_id, reply_status, 
+    reply_text
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_bank_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_bank_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.SBankLog" >
+    insert into s_bank_log (log_id, request_param, request_interface, 
+      apply_time, pay_channel_id, reply_status, 
+      reply_text)
+    values (#{logId,jdbcType=INTEGER}, #{requestParam,jdbcType=VARCHAR}, #{requestInterface,jdbcType=VARCHAR}, 
+      #{applyTime,jdbcType=VARCHAR}, #{payChannelId,jdbcType=INTEGER}, #{replyStatus,jdbcType=INTEGER}, 
+      #{replyText,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.SBankLog" >
+    insert into s_bank_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="requestParam != null" >
+        request_param,
+      </if>
+      <if test="requestInterface != null" >
+        request_interface,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id,
+      </if>
+      <if test="replyStatus != null" >
+        reply_status,
+      </if>
+      <if test="replyText != null" >
+        reply_text
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="requestParam != null" >
+        #{requestParam,jdbcType=VARCHAR},
+      </if>
+      <if test="requestInterface != null" >
+        #{requestInterface,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="replyStatus != null" >
+        #{replyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="replyText != null" >
+        #{replyText,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.SBankLog" >
+    update s_bank_log
+    <set >
+      <if test="requestParam != null" >
+        request_param = #{requestParam,jdbcType=VARCHAR},
+      </if>
+      <if test="requestInterface != null" >
+        request_interface = #{requestInterface,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="replyStatus != null" >
+        reply_status = #{replyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="replyText != null" >
+        reply_text = #{replyText,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.SBankLog" >
+    update s_bank_log
+    set request_param = #{requestParam,jdbcType=VARCHAR},
+      request_interface = #{requestInterface,jdbcType=VARCHAR},
+      apply_time = #{applyTime,jdbcType=VARCHAR},
+      pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      reply_status = #{replyStatus,jdbcType=INTEGER},
+      reply_text = #{replyText,jdbcType=VARCHAR}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>

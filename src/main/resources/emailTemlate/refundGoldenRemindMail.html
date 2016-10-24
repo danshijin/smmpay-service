@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>退款入金</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body style="font-family:'Microsoft Yahei','Simsun'">
+  <table cellpadding="0" cellspacing="0" width="850px" style="margin:0px auto; border:1px #dddddd solid; font-size:16px; color:#333; line-height:28px">
+    <tr>
+        <td style="padding:10px">尊敬的$sellerName，您好！<br></td>
+    </tr>
+    <tr>
+        <td style="padding:10px">您的订单（订单编号：<b>$mallOrderId</b>）产生一笔，交易金额为<b>￥$dealMoney</b>元（交易编号：$paymentId）的差额需结算！请尽快<a style="color:#fcaebc; font-weight:bold;" >入金</a>完成差额结算操作！</td>
+    </tr>
+    <tr>
+    <!-- refundGoldenRemindMail.html -->
+        <td>
+            <table cellpadding="0" cellspacing="0" width="100%" style="line-height:18px; font-size:14px">
+                <tr>
+                    <td style="padding:20px" colspan="2" width="385px">
+                        <b>付款详情</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 20px 0px">对方企业：$buyerCompanyName</td>
+                    <td style="padding:5px 20px 0px" >收交方式：$settlementType</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 20px 0px">对方账号：$buyerAccNo</td>
+                    <td style="padding:5px 20px 0px">交易类型：$dealType</td>
+                    
+                </tr>
+                <tr>
+                	<td style="padding:5px 20px 0px">付款原由：差额结算</td>
+                	<td style="padding:5px 20px 0px" >发票说明：$invoice</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 20px 0px">商品名称：$productName</td>
+                    <td style="padding:5px 20px 0px" >交易编号：$paymentId</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 20px 0px">商品详情：$productDetail</td>
+                    <td style="padding:5px 20px 0px">付款方式：$paymentType</td>
+                </tr>
+                <tr>
+                	<td style="padding:5px 20px 0px">商品数量：$productNum</td>
+                	<td style="padding:5px 20px 0px">付款时间：$createTime</td>
+                </tr>
+                <tr>
+                	<td style="padding:5px 20px 0px">交易金额：￥$dealMoney元</td>
+                	<td style="padding:5px 20px 0px">资金流水号：$freezeClientId</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 20px 0px" colspan="2">采购时间：$orderCreateTime</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size:12px; color:#999; padding:0px 10px 50px; line-height:18px">
+            <p style="border-top:1px #eeeeee solid; padding-top:20px ">此为系统邮件，请勿回复<br>请保管好您的邮箱，避免账号被他人盗用</p><br>
+            上海有色网版权所有2000-2015
+        </td>
+    </tr> 
+    </table>
+  </body>
+</html>

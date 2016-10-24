@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.TrFreezeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.TrFreezeRecord" >
+    <id column="freeze_id" property="freezeId" jdbcType="INTEGER" />
+    <result column="freeze_no" property="freezeNo" jdbcType="VARCHAR" />
+    <result column="freeze_money" property="freezeMoney" jdbcType="DECIMAL" />
+    <result column="apply_time" property="applyTime" jdbcType="VARCHAR" />
+    <result column="reply_time" property="replyTime" jdbcType="VARCHAR" />
+    <result column="freeze_status" property="freezeStatus" jdbcType="INTEGER" />
+    <result column="freeze_note" property="freezeNote" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="payment_id" property="paymentId" jdbcType="INTEGER" />
+    <result column="pay_channel_id" property="payChannelId" jdbcType="INTEGER" />
+    <result column="user_pay_channel_id" property="userPayChannelId" jdbcType="INTEGER" />
+    <result column="freeze_client_id" property="freezeClientId" jdbcType="VARCHAR" />
+    <result column="freeze_user_money" property="freezeUserMoney" jdbcType="DECIMAL" />
+    <result column="freeze_user_freeze_money" property="freezeUserFreezeMoney" jdbcType="DECIMAL" />
+  	<result column="freeze_client_id" property="freezeClientId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    freeze_id, freeze_no, freeze_money, apply_time, reply_time, freeze_status, freeze_note, 
+   		user_id, user_name,
+    payment_id, pay_channel_id, user_pay_channel_id,freeze_client_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_freeze_record
+    where freeze_id = #{freezeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tr_freeze_record
+    where freeze_id = #{freezeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.TrFreezeRecord" useGeneratedKeys="true" keyProperty="freezeId">
+    insert into tr_freeze_record (freeze_no, freeze_money, 
+      apply_time, reply_time, freeze_status, 
+      freeze_note, user_id, user_name, 
+      payment_id, pay_channel_id, 
+      user_pay_channel_id,
+      freeze_client_id)
+    values (#{freezeNo,jdbcType=VARCHAR}, #{freezeMoney,jdbcType=DECIMAL}, 
+      #{applyTime,jdbcType=VARCHAR}, #{replyTime,jdbcType=VARCHAR}, #{freezeStatus,jdbcType=INTEGER}, 
+      #{freezeNote,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{paymentId,jdbcType=INTEGER}, #{payChannelId,jdbcType=INTEGER}, 
+      #{userPayChannelId,jdbcType=INTEGER},
+      #{freezeClientId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.TrFreezeRecord" useGeneratedKeys="true" keyProperty="freezeId">
+    insert into tr_freeze_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="freezeNo != null" >
+        freeze_no,
+      </if>
+      <if test="freezeMoney != null" >
+        freeze_money,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="replyTime != null" >
+        reply_time,
+      </if>
+      <if test="freezeStatus != null" >
+        freeze_status,
+      </if>
+      <if test="freezeNote != null" >
+        freeze_note,
+      </if>
+     
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      
+      <if test="paymentId != null" >
+        payment_id,
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id,
+      </if>
+      <if test="userPayChannelId != null" >
+        user_pay_channel_id,
+      </if>
+      <if test="freezeClientId != null" >
+        freeze_client_id
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="freezeNo != null" >
+        #{freezeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="freezeMoney != null" >
+        #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        #{replyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="freezeStatus != null" >
+        #{freezeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="freezeNote != null" >
+        #{freezeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentId != null" >
+        #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelId != null" >
+        #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="userPayChannelId != null" >
+        #{userPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="freezeClientId != null" >
+        #{freezeClientId,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.TrFreezeRecord" >
+    update tr_freeze_record
+    <set >
+      <if test="freezeNo != null" >
+        freeze_no = #{freezeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="freezeMoney != null" >
+        freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        reply_time = #{replyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="freezeStatus != null" >
+        freeze_status = #{freezeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="freezeNote != null" >
+        freeze_note = #{freezeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentId != null" >
+        payment_id = #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="userPayChannelId != null" >
+        user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where freeze_id = #{freezeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.TrFreezeRecord" >
+    update tr_freeze_record
+    set freeze_no = #{freezeNo,jdbcType=VARCHAR},
+      freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+      apply_time = #{applyTime,jdbcType=VARCHAR},
+      reply_time = #{replyTime,jdbcType=VARCHAR},
+      freeze_status = #{freezeStatus,jdbcType=INTEGER},
+      freeze_note = #{freezeNote,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      payment_id = #{paymentId,jdbcType=INTEGER},
+      pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      user_pay_channel_id = #{userPayChannelId,jdbcType=INTEGER}
+    where freeze_id = #{freezeId,jdbcType=INTEGER}
+  </update>
+  <!-- 检查账户是否有冻结状态为请求中记录 -->
+  <select id="queryFreezeRecordStatus" resultType="java.lang.Integer" parameterType="java.util.HashMap" >
+    select count(*) from tr_freeze_record  where  freeze_status = 0
+      <if test="userId != null" >
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+  </select>
+  <!-- 查询所有状态为请求中的记录 -->
+  <select id="queryFreezeRecordList" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select <include refid="Base_Column_List" /> from tr_freeze_record  where  freeze_status = 0
+  </select>
+  <!-- 修改冻结记录状态-->
+  <update id="updateFreezeStatus" parameterType="com.smmpay.respository.model.TrFreezeRecord" >
+    update tr_freeze_record
+    	set freeze_status = #{freezeStatus,jdbcType=INTEGER}
+    	<if test="replyTime != null" >
+        	,reply_time = #{replyTime,jdbcType=VARCHAR}
+       </if>
+       <if test="freezeNote != null" >
+        	 ,freeze_note = #{freezeNote,jdbcType=VARCHAR}
+       </if>
+    where freeze_id = #{freezeId,jdbcType=INTEGER}
+  </update>
+  <!-- 判断冻结编号是否存在于数据库 -->
+  <select id="queryByFreezeNo" resultType="java.lang.Integer" parameterType="java.util.HashMap" >
+    select count(*) from tr_freeze_record  where freeze_no = #{freezeNo,jdbcType=VARCHAR}
+  </select>
+  <!--回填冻结编号、修改冻结状态 -->
+  <update id="updateFreezeNo" parameterType="com.smmpay.respository.model.TrFreezeRecord" >
+    update tr_freeze_record 
+     set freeze_status = #{freezeStatus,jdbcType=INTEGER},
+        freeze_no = #{freezeNo,jdbcType=VARCHAR},
+        freeze_user_money = #{freezeUserMoney,jdbcType=DECIMAL},
+        freeze_user_freeze_money = #{freezeUserFreezeMoney,jdbcType=DECIMAL},
+        reply_time = #{replyTime,jdbcType=VARCHAR}
+    where freeze_id = #{freezeId,jdbcType=INTEGER}
+  </update>
+  <!-- 查询所有解冻状态为请求中的记录 -->
+  <select id="queryFreezeRecordListByUNFreeze" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select <include refid="Base_Column_List" /> from tr_freeze_record  where  unfreeze_status = 0
+  </select>
+   <!-- 修改冻结记录解冻状态 -->
+  <update id="updateUNFreezeStatus" parameterType="com.smmpay.respository.model.TrFreezeRecord" >
+    update tr_freeze_record
+    	set unfreeze_status = #{unfreezeStatus,jdbcType=INTEGER}
+    where freeze_id = #{freezeId,jdbcType=INTEGER}
+  </update>
+  <!-- 获取最后一条冻结记录 -->
+  <select id="lastFreezeRecord" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select <include refid="Base_Column_List" /> from tr_freeze_record  
+    where  payment_id = #{paymentId,jdbcType=INTEGER} and freeze_status = 1 and  freeze_no is not null order by apply_time desc limit 1
+  </select>
+  <select id="queryFreezeRecordByStatus" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select <include refid="Base_Column_List" /> from tr_freeze_record  
+    where  payment_id = #{paymentId,jdbcType=INTEGER} and freeze_status = #{freezeStatus,jdbcType=INTEGER} order by apply_time desc limit 1
+  </select>
+  <!-- 根据paymentId查询 -->
+  <select id="queryByPaymentId" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select <include refid="Base_Column_List" /> from tr_freeze_record  
+    where  payment_id = #{paymentId,jdbcType=INTEGER} and freeze_status = 1 and  freeze_no is not null order by apply_time desc limit 1
+  </select>
+  <!-- 获取加密参数 -->
+  <select id="getMd5Params" resultMap="BaseResultMap" parameterType="int">
+  	select payment_id, freeze_money, freeze_client_id, apply_time from tr_freeze_record where freeze_id = #{freezeId}
+  </select>
+  <!-- 添加验证参数 -->
+  <update id="addVerifyCode">
+	  update tr_freeze_record set verify_code = #{veriyCode} where freeze_id = #{freezeRecordId};
+  </update>
+  <select id="getVerify" parameterType="int" resultType="java.lang.String">
+  	select verify_code as verifyCode from tr_freeze_record where freeze_id = #{freezeRecordId};
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.TrPaymentRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.TrPaymentRecord" >
+    <id column="payment_id" property="paymentId" jdbcType="INTEGER" />
+    <result column="payment_no" property="paymentNo" jdbcType="VARCHAR" />
+    <result column="deal_money" property="dealMoney" jdbcType="DECIMAL" />
+    <result column="deal_type" property="dealType" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="buyer_company_name" property="buyerCompanyName" jdbcType="VARCHAR" />
+    <result column="buyer_mall_user_name" property="buyerMallUserName" jdbcType="VARCHAR" />
+    <result column="buyer_pay_channel_id" property="buyerPayChannelId" jdbcType="INTEGER" />
+    <result column="buyer_user_id" property="buyerUserId" jdbcType="VARCHAR" />
+    <result column="seller_company_name" property="sellerCompanyName" jdbcType="VARCHAR" />
+    <result column="seller_mall_user_name" property="sellerMallUserName" jdbcType="VARCHAR" />
+    <result column="seller_pay_channel_id" property="sellerPayChannelId" jdbcType="INTEGER" />
+    <result column="seller_user_id" property="sellerUserId" jdbcType="VARCHAR" />
+    <result column="mall_order_id" property="mallOrderId" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_num" property="productNum" jdbcType="DECIMAL" />
+    <result column="product_num_unit" property="productNumUnit" jdbcType="VARCHAR" />
+    <result column="product_detail" property="productDetail" jdbcType="VARCHAR" />
+    <result column="payment_code" property="paymentCode" jdbcType="VARCHAR" />
+    <result column="pay_channel_id" property="payChannelId" jdbcType="INTEGER" />
+    <result column="is_handler" property="isHandler" jdbcType="INTEGER" />
+    <result column="freeze_time" property="freezeTime" jdbcType="VARCHAR" />
+    <result column="done_time" property="doneTime" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="payment_time" property="paymentTime" jdbcType="VARCHAR" />
+    <result column="invoice" property="invoice" jdbcType="VARCHAR" />
+    <result column="notify_url" property="notifyUrl" jdbcType="VARCHAR" /> 
+    <result column="payment_type" property="paymentType" jdbcType="VARCHAR" />
+    <result column="settlement_type" property="settlementType" jdbcType="VARCHAR" />
+    <result column="payment_status" property="paymentStatus" jdbcType="INTEGER" />
+    <result column="order_create_time" property="orderCreateTime" jdbcType="VARCHAR" />
+    <result column="verify_code" property="verifyCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    payment_id, payment_no,deal_money, deal_type,pay_type, buyer_company_name, buyer_mall_user_name, buyer_pay_channel_id, 
+    buyer_user_id, seller_company_name, seller_mall_user_name, seller_pay_channel_id, 
+    seller_user_id, mall_order_id, product_name, product_num, product_num_unit, product_detail, 
+    payment_code, pay_channel_id, is_handler, freeze_time, done_time, create_time, payment_time, 
+    invoice, notify_url,payment_type, settlement_type, payment_status, order_create_time,verify_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_payment_record
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPaymentNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_payment_record
+    where payment_no = #{paymentNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tr_payment_record
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.TrPaymentRecord" useGeneratedKeys="true" keyProperty="paymentId" >
+    insert into tr_payment_record (payment_id, deal_money, payment_no,deal_type,pay_type, 
+      buyer_company_name, buyer_mall_user_name, buyer_pay_channel_id, 
+      buyer_user_id, seller_company_name, seller_mall_user_name, 
+      seller_pay_channel_id, seller_user_id, mall_order_id, 
+      product_name, product_num, product_num_unit, 
+      product_detail, payment_code, pay_channel_id, 
+      is_handler, freeze_time, done_time, 
+      create_time, payment_time, invoice, notify_url,
+      payment_type, settlement_type, payment_status, 
+      order_create_time)
+    values (#{paymentId,jdbcType=INTEGER}, #{dealMoney,jdbcType=DECIMAL},#{paymentNo,jdbcType=VARCHAR}, #{dealType,jdbcType=VARCHAR},#{payType,jdbcType=INTEGER}, 
+      #{buyerCompanyName,jdbcType=VARCHAR}, #{buyerMallUserName,jdbcType=VARCHAR}, #{buyerPayChannelId,jdbcType=INTEGER}, 
+      #{buyerUserId,jdbcType=VARCHAR}, #{sellerCompanyName,jdbcType=VARCHAR}, #{sellerMallUserName,jdbcType=VARCHAR}, 
+      #{sellerPayChannelId,jdbcType=INTEGER}, #{sellerUserId,jdbcType=VARCHAR}, #{mallOrderId,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productNum,jdbcType=INTEGER}, #{productNumUnit,jdbcType=VARCHAR}, 
+      #{productDetail,jdbcType=VARCHAR}, #{paymentCode,jdbcType=VARCHAR}, #{payChannelId,jdbcType=INTEGER}, 
+      #{isHandler,jdbcType=INTEGER}, #{freezeTime,jdbcType=VARCHAR}, #{doneTime,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{paymentTime,jdbcType=VARCHAR}, #{invoice,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR},
+      #{paymentType,jdbcType=VARCHAR}, #{settlementType,jdbcType=VARCHAR}, #{paymentStatus,jdbcType=INTEGER}, 
+      #{orderCreateTime,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertNew" parameterType="com.smmpay.respository.model.TrPaymentRecord" useGeneratedKeys="true" keyProperty="paymentId">
+    insert into tr_payment_record (deal_money, payment_no,deal_type, pay_type,
+      buyer_company_name, buyer_mall_user_name, buyer_pay_channel_id, 
+      buyer_user_id, seller_company_name, seller_mall_user_name, 
+      seller_pay_channel_id, seller_user_id, mall_order_id, 
+      product_name, product_num, product_num_unit, 
+      product_detail, payment_code, pay_channel_id, 
+      is_handler,
+      create_time, invoice, notify_url,
+      payment_type, settlement_type, payment_status, 
+      order_create_time)
+    values (#{dealMoney,jdbcType=DECIMAL}, #{paymentNo,jdbcType=VARCHAR},#{dealType,jdbcType=VARCHAR},#{payType,jdbcType=INTEGER}, 
+      #{buyerCompanyName,jdbcType=VARCHAR}, #{buyerMallUserName,jdbcType=VARCHAR}, #{buyerPayChannelId,jdbcType=INTEGER}, 
+      #{buyerUserId,jdbcType=VARCHAR}, #{sellerCompanyName,jdbcType=VARCHAR}, #{sellerMallUserName,jdbcType=VARCHAR}, 
+      #{sellerPayChannelId,jdbcType=INTEGER}, #{sellerUserId,jdbcType=VARCHAR}, #{mallOrderId,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productNum,jdbcType=INTEGER}, #{productNumUnit,jdbcType=VARCHAR}, 
+      #{productDetail,jdbcType=VARCHAR}, #{paymentCode,jdbcType=VARCHAR}, #{payChannelId,jdbcType=INTEGER}, 
+      #{isHandler,jdbcType=INTEGER},
+      #{createTime,jdbcType=VARCHAR},#{invoice,jdbcType=VARCHAR},#{notifyUrl,jdbcType=VARCHAR}, 
+      #{paymentType,jdbcType=VARCHAR}, #{settlementType,jdbcType=VARCHAR}, #{paymentStatus,jdbcType=INTEGER}, 
+      #{orderCreateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.TrPaymentRecord" useGeneratedKeys="true" keyProperty="paymentId">
+    insert into tr_payment_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      
+      <if test="dealMoney != null" >
+        deal_money,
+      </if>
+      <if test="paymentNo != null" >
+        payment_no,
+      </if>
+      <if test="dealType != null" >
+        deal_type,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="buyerCompanyName != null" >
+        buyer_company_name,
+      </if>
+      <if test="buyerMallUserName != null" >
+        buyer_mall_user_name,
+      </if>
+      <if test="buyerPayChannelId != null" >
+        buyer_pay_channel_id,
+      </if>
+      <if test="buyerUserId != null" >
+        buyer_user_id,
+      </if>
+      <if test="sellerCompanyName != null" >
+        seller_company_name,
+      </if>
+      <if test="sellerMallUserName != null" >
+        seller_mall_user_name,
+      </if>
+      <if test="sellerPayChannelId != null" >
+        seller_pay_channel_id,
+      </if>
+      <if test="sellerUserId != null" >
+        seller_user_id,
+      </if>
+      <if test="mallOrderId != null" >
+        mall_order_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productNum != null" >
+        product_num,
+      </if>
+      <if test="productNumUnit != null" >
+        product_num_unit,
+      </if>
+      <if test="productDetail != null" >
+        product_detail,
+      </if>
+      <if test="paymentCode != null" >
+        payment_code,
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id,
+      </if>
+      <if test="isHandler != null" >
+        is_handler,
+      </if>
+      <if test="freezeTime != null" >
+        freeze_time,
+      </if>
+      <if test="doneTime != null" >
+        done_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="paymentTime != null" >
+        payment_time,
+      </if>
+      <if test="invoice != null" >
+        invoice,
+      </if>
+      <if test="notifyUrl != null" >
+        notify_url,
+      </if>
+      <if test="paymentType != null" >
+        payment_type,
+      </if>
+      <if test="settlementType != null" >
+        settlement_type,
+      </if>
+      <if test="paymentStatus != null" >
+        payment_status,
+      </if>
+      <if test="orderCreateTime != null" >
+        order_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dealMoney != null" >
+        #{dealMoney,jdbcType=DECIMAL},
+      </if>
+       <if test="paymentNo != null" >
+        #{paymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dealType != null" >
+        #{dealType,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="buyerCompanyName != null" >
+        #{buyerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerMallUserName != null" >
+        #{buyerMallUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerPayChannelId != null" >
+        #{buyerPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerUserId != null" >
+        #{buyerUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerCompanyName != null" >
+        #{sellerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerMallUserName != null" >
+        #{sellerMallUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerPayChannelId != null" >
+        #{sellerPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerUserId != null" >
+        #{sellerUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallOrderId != null" >
+        #{mallOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNum != null" >
+        #{productNum,jdbcType=INTEGER},
+      </if>
+      <if test="productNumUnit != null" >
+        #{productNumUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productDetail != null" >
+        #{productDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentCode != null" >
+        #{paymentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="isHandler != null" >
+        #{isHandler,jdbcType=INTEGER},
+      </if>
+      <if test="freezeTime != null" >
+        #{freezeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="doneTime != null" >
+        #{doneTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentTime != null" >
+        #{paymentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        #{invoice,jdbcType=VARCHAR},
+      </if>
+       <if test="notifyUrl != null" >
+        #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null" >
+        #{paymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementType != null" >
+        #{settlementType,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentStatus != null" >
+        #{paymentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreateTime != null" >
+        #{orderCreateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.TrPaymentRecord" >
+    update tr_payment_record
+    <set >
+      <if test="dealMoney != null" >
+        deal_money = #{dealMoney,jdbcType=DECIMAL},
+      </if>
+       <if test="paymentNo != null" >
+        payment_no = #{paymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dealType != null" >
+        deal_type = #{dealType,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="buyerCompanyName != null" >
+        buyer_company_name = #{buyerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerMallUserName != null" >
+        buyer_mall_user_name = #{buyerMallUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerPayChannelId != null" >
+        buyer_pay_channel_id = #{buyerPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerUserId != null" >
+        buyer_user_id = #{buyerUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerCompanyName != null" >
+        seller_company_name = #{sellerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerMallUserName != null" >
+        seller_mall_user_name = #{sellerMallUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerPayChannelId != null" >
+        seller_pay_channel_id = #{sellerPayChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerUserId != null" >
+        seller_user_id = #{sellerUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallOrderId != null" >
+        mall_order_id = #{mallOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNum != null" >
+        product_num = #{productNum,jdbcType=INTEGER},
+      </if>
+      <if test="productNumUnit != null" >
+        product_num_unit = #{productNumUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productDetail != null" >
+        product_detail = #{productDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentCode != null" >
+        payment_code = #{paymentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="isHandler != null" >
+        is_handler = #{isHandler,jdbcType=INTEGER},
+      </if>
+      <if test="freezeTime != null" >
+        freeze_time = #{freezeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="doneTime != null" >
+        done_time = #{doneTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentTime != null" >
+        payment_time = #{paymentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        invoice = #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        notify_url = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null" >
+        payment_type = #{paymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementType != null" >
+        settlement_type = #{settlementType,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentStatus != null" >
+        payment_status = #{paymentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreateTime != null" >
+        order_create_time = #{orderCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyCode != null" >
+        verify_code = #{verifyCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.TrPaymentRecord" >
+    update tr_payment_record
+    set deal_money = #{dealMoney,jdbcType=DECIMAL}, payment_no = #{paymentNo,jdbcType=VARCHAR},
+      deal_type = #{dealType,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=INTEGER},
+      buyer_company_name = #{buyerCompanyName,jdbcType=VARCHAR},
+      buyer_mall_user_name = #{buyerMallUserName,jdbcType=VARCHAR},
+      buyer_pay_channel_id = #{buyerPayChannelId,jdbcType=INTEGER},
+      buyer_user_id = #{buyerUserId,jdbcType=VARCHAR},
+      seller_company_name = #{sellerCompanyName,jdbcType=VARCHAR},
+      seller_mall_user_name = #{sellerMallUserName,jdbcType=VARCHAR},
+      seller_pay_channel_id = #{sellerPayChannelId,jdbcType=INTEGER},
+      seller_user_id = #{sellerUserId,jdbcType=VARCHAR},
+      mall_order_id = #{mallOrderId,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_num = #{productNum,jdbcType=INTEGER},
+      product_num_unit = #{productNumUnit,jdbcType=VARCHAR},
+      product_detail = #{productDetail,jdbcType=VARCHAR},
+      payment_code = #{paymentCode,jdbcType=VARCHAR},
+      pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      is_handler = #{isHandler,jdbcType=INTEGER},
+      freeze_time = #{freezeTime,jdbcType=VARCHAR},
+      done_time = #{doneTime,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      payment_time = #{paymentTime,jdbcType=VARCHAR},
+      invoice = #{invoice,jdbcType=VARCHAR},
+      notify_url = #{notifyUrl,jdbcType=VARCHAR},
+      payment_type = #{paymentType,jdbcType=VARCHAR},
+      settlement_type = #{settlementType,jdbcType=VARCHAR},
+      payment_status = #{paymentStatus,jdbcType=INTEGER},
+      order_create_time = #{orderCreateTime,jdbcType=VARCHAR}
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectForList" resultMap="BaseResultMap" parameterType="com.smmpay.inter.dto.req.TradingRecordDTO" >
+    select
+    <include refid="Base_Column_List" />
+    from tr_payment_record
+    where
+    create_time &lt;= #{endDate,jdbcType=VARCHAR}
+    <if test="startDate != null">
+      and  create_time &gt;= #{startDate,jdbcType=VARCHAR}
+    </if>
+
+    <if test="mallOrderId != null">
+      and mall_order_id = #{mallOrderId,jdbcType=VARCHAR}
+    </if>
+    <if test="paymentStatus != 4">
+      and payment_status = #{paymentStatus,jdbcType=INTEGER}
+    </if>
+    <if test="paymentStatus == 4">
+      /*and payment_status != 3*/
+    </if>
+
+    <if test="isBuy == 0">
+    and
+    (
+    (seller_user_id = #{userId,jdbcType=INTEGER}
+    <if test="opposite != null">
+      and buyer_company_name = #{opposite,jdbcType=VARCHAR}
+    </if>
+    )
+    or (buyer_user_id = #{userId,jdbcType=INTEGER}
+    <if test="opposite != null">
+      and seller_company_name = #{opposite,jdbcType=VARCHAR}
+    </if>
+    )
+    )
+    </if>
+    <if test="isBuy == 1">
+      and buyer_user_id = #{userId,jdbcType=INTEGER}
+      <if test="opposite != null">
+        and seller_company_name = #{opposite,jdbcType=VARCHAR}
+      </if>
+    </if>
+    <if test="isBuy == 2">
+      and seller_user_id = #{userId,jdbcType=INTEGER}
+      <if test="opposite != null">
+        and buyer_company_name = #{opposite,jdbcType=VARCHAR}
+      </if>
+    </if>
+    order by create_time desc
+    limit #{startValue,jdbcType=INTEGER}, #{pageSizeValue,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.smmpay.respository.model.TrPaymentRecord" >
+    select
+    <include refid="Base_Column_List" />
+    from tr_payment_record
+    where 1=1
+    <if test="mallOrderId != null">
+      AND mall_order_id = #{mallOrderId,jdbcType=VARCHAR}
+    </if>
+    <if test="payType != null">
+      AND pay_type = #{payType,jdbcType=INTEGER}
+    </if>
+ 
+  </select>
+  
+  <select id="selectByParam" resultMap="BaseResultMap" parameterType="com.smmpay.respository.model.TrPaymentRecord" >
+    select
+    <include refid="Base_Column_List" />
+    from tr_payment_record
+    where 1=1
+    <if test="buyerUserId != null">
+      AND buyer_user_id = #{buyerUserId,jdbcType=VARCHAR}
+    </if>
+    <if test="sellerUserId != null">
+      AND seller_user_id = #{sellerUserId,jdbcType=VARCHAR}
+    </if>
+    <if test="paymentNo != null">
+      AND payment_no = #{paymentNo,jdbcType=VARCHAR}
+    </if>
+ 
+  </select>
+  
+  <select id="countForList" parameterType="com.smmpay.inter.dto.req.TradingRecordDTO" resultType="java.lang.Integer">
+    select
+    count(payment_id)
+    from tr_payment_record
+    where
+    create_time &lt;= #{endDate,jdbcType=VARCHAR}
+    <if test="startDate != null">
+      and  create_time &gt;= #{startDate,jdbcType=VARCHAR}
+    </if>
+    <if test="mallOrderId != null">
+      and mall_order_id = #{mallOrderId,jdbcType=VARCHAR}
+    </if>
+    <if test="paymentStatus != 4">
+      and payment_status = #{paymentStatus,jdbcType=INTEGER}
+    </if>
+    <if test="paymentStatus == 4">
+      /*and payment_status != 3*/
+    </if>
+
+    <if test="isBuy == 0">
+      and
+      (
+      (seller_user_id = #{userId,jdbcType=INTEGER}
+      <if test="opposite != null">
+        and buyer_company_name = #{opposite,jdbcType=VARCHAR}
+      </if>
+      )
+      or (buyer_user_id = #{userId,jdbcType=INTEGER}
+      <if test="opposite != null">
+        and seller_company_name = #{opposite,jdbcType=VARCHAR}
+      </if>
+      )
+      )
+    </if>
+    <if test="isBuy == 1">
+      and buyer_user_id = #{userId,jdbcType=INTEGER}
+      <if test="opposite != null">
+        and seller_company_name = #{opposite,jdbcType=VARCHAR}
+      </if>
+    </if>
+    <if test="isBuy == 2">
+      and seller_user_id = #{userId,jdbcType=INTEGER}
+      <if test="opposite != null">
+        and buyer_company_name = #{opposite,jdbcType=VARCHAR}
+      </if>
+    </if>
+  </select>
+  <!-- 查询所有待支付非手动处理记录 -->
+  <select id="queryPaymentRecord" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_payment_record
+    where payment_status = #{paymentStatus,jdbcType=INTEGER} and is_handler = #{isHandler,jdbcType=INTEGER}
+  </select>
+  <!-- 更新支付记录为手动处理 -->
+  <update id="updateHandleByKey" parameterType="java.lang.Integer" >
+    update tr_payment_record
+    	set is_handler = 1
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </update>
+  <!-- 更新支付记录状态 -->
+  <update id="updatePaymentStatus" parameterType="com.smmpay.respository.model.TrPaymentRecord" >
+    update tr_payment_record
+    	set payment_status = #{paymentStatus,jdbcType=INTEGER}
+    	<if test="doneTime != null">
+       	 	, done_time = #{doneTime,jdbcType=VARCHAR}
+      	</if>
+      	<if test="freezeTime != null">
+       	 	, freeze_time = #{freezeTime,jdbcType=VARCHAR}
+      	</if>
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 查询支付码 -->
+  <select id="getPaymentCode" resultType="java.lang.String" parameterType="java.util.HashMap" >
+    select getPaymentCode(#{codeType,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{source,jdbcType=INTEGER})
+  </select>
+  <!-- 查询支付码 -->
+  <select id="getMarketCode" resultType="java.lang.Integer" >
+    select open from tr_market_status
+  </select>
+</mapper>

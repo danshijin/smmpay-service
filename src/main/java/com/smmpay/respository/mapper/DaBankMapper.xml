@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.DaBankMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.DaBank" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bank_kind" property="bankKind" jdbcType="INTEGER" />
+    <result column="short_name" property="shortName" jdbcType="VARCHAR" />
+    <result column="bank_type" property="bankType" jdbcType="CHAR" />
+    <result column="business_type" property="businessType" jdbcType="CHAR" />
+    <result column="detaile_add" property="detaileAdd" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="cnaps" property="cnaps" jdbcType="VARCHAR" />
+    <result column="swift" property="swift" jdbcType="VARCHAR" />
+    <result column="eng_name" property="engName" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+    <result column="update_fun_id" property="updateFunId" jdbcType="VARCHAR" />
+    <result column="update_version" property="updateVersion" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bank_kind, short_name, bank_type, business_type, detaile_add, area_id, city_id, 
+    cnaps, swift, eng_name, telephone, delete_flag, create_time, create_user, update_time, 
+    update_user, update_fun_id, update_version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from da_bank
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from da_bank
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.DaBank" >
+    insert into da_bank (id, bank_kind, short_name, 
+      bank_type, business_type, detaile_add, 
+      area_id, city_id, cnaps, 
+      swift, eng_name, telephone, 
+      delete_flag, create_time, create_user, 
+      update_time, update_user, update_fun_id, 
+      update_version)
+    values (#{id,jdbcType=INTEGER}, #{bankKind,jdbcType=INTEGER}, #{shortName,jdbcType=VARCHAR}, 
+      #{bankType,jdbcType=CHAR}, #{businessType,jdbcType=CHAR}, #{detaileAdd,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{cnaps,jdbcType=VARCHAR}, 
+      #{swift,jdbcType=VARCHAR}, #{engName,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{updateFunId,jdbcType=VARCHAR}, 
+      #{updateVersion,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.DaBank" >
+    insert into da_bank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bankKind != null" >
+        bank_kind,
+      </if>
+      <if test="shortName != null" >
+        short_name,
+      </if>
+      <if test="bankType != null" >
+        bank_type,
+      </if>
+      <if test="businessType != null" >
+        business_type,
+      </if>
+      <if test="detaileAdd != null" >
+        detaile_add,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cnaps != null" >
+        cnaps,
+      </if>
+      <if test="swift != null" >
+        swift,
+      </if>
+      <if test="engName != null" >
+        eng_name,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateFunId != null" >
+        update_fun_id,
+      </if>
+      <if test="updateVersion != null" >
+        update_version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bankKind != null" >
+        #{bankKind,jdbcType=INTEGER},
+      </if>
+      <if test="shortName != null" >
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null" >
+        #{bankType,jdbcType=CHAR},
+      </if>
+      <if test="businessType != null" >
+        #{businessType,jdbcType=CHAR},
+      </if>
+      <if test="detaileAdd != null" >
+        #{detaileAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="cnaps != null" >
+        #{cnaps,jdbcType=VARCHAR},
+      </if>
+      <if test="swift != null" >
+        #{swift,jdbcType=VARCHAR},
+      </if>
+      <if test="engName != null" >
+        #{engName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateFunId != null" >
+        #{updateFunId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateVersion != null" >
+        #{updateVersion,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.DaBank" >
+    update da_bank
+    <set >
+      <if test="bankKind != null" >
+        bank_kind = #{bankKind,jdbcType=INTEGER},
+      </if>
+      <if test="shortName != null" >
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null" >
+        bank_type = #{bankType,jdbcType=CHAR},
+      </if>
+      <if test="businessType != null" >
+        business_type = #{businessType,jdbcType=CHAR},
+      </if>
+      <if test="detaileAdd != null" >
+        detaile_add = #{detaileAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="cnaps != null" >
+        cnaps = #{cnaps,jdbcType=VARCHAR},
+      </if>
+      <if test="swift != null" >
+        swift = #{swift,jdbcType=VARCHAR},
+      </if>
+      <if test="engName != null" >
+        eng_name = #{engName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateFunId != null" >
+        update_fun_id = #{updateFunId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateVersion != null" >
+        update_version = #{updateVersion,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.DaBank" >
+    update da_bank
+    set bank_kind = #{bankKind,jdbcType=INTEGER},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      bank_type = #{bankType,jdbcType=CHAR},
+      business_type = #{businessType,jdbcType=CHAR},
+      detaile_add = #{detaileAdd,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      cnaps = #{cnaps,jdbcType=VARCHAR},
+      swift = #{swift,jdbcType=VARCHAR},
+      eng_name = #{engName,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_fun_id = #{updateFunId,jdbcType=VARCHAR},
+      update_version = #{updateVersion,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getBankByCity" resultMap="BaseResultMap" parameterType="com.smmpay.respository.model.DaBank" >
+    SELECT id,short_name,cnaps,eng_name from da_bank bank WHERE bank.delete_flag = 0  AND bank.city_id = #{cityId,jdbcType=INTEGER}
+     AND bank.bank_kind = #{bankKind,jdbcType=INTEGER}
+    <if test="shortName != null" >
+       AND bank.short_name LIKE CONCAT('%',#{shortName},'%')
+    </if>
+    order by bank.short_name asc limit 0,10
+  </select>
+</mapper>

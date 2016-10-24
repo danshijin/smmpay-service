@@ -1,0 +1,129 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- 引入配置文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:common.properties">
+
+		</property>
+	</bean>
+	<!-- ======================== 调度工厂 ======================== -->
+	<bean id="SpringJobSchedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--  <ref bean="stayPayHandleTrigger" />
+				 <ref bean="freezePayResultHandleTrigger" />
+				 <ref bean="unFreezePayResultHandleTrigger" /> 
+				 <ref bean="payFreezeResultNotifyTrigger" /> 
+				 <ref bean="platformDebitsTrigger" /> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ======================== 轮询待支付记录处理流程配置开始======================== -->
+	<bean id="stayPayHandleTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="stayPayHandleMethod"></property>
+		<property name="cronExpression" value="${STAY.PAY}"></property>
+	</bean>
+
+	<bean id="stayPayHandle" class="com.smmpay.job.StayPayHandleJob" />
+	<bean id="stayPayHandleMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="stayPayHandle" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+		<property name="concurrent" value="false" ></property>
+	</bean>
+	<!-- ======================== 轮询待支付记录处理流程配置结束======================== -->
+	
+	
+	
+	<!-- ======================== 轮询冻结支付结果流程配置开始======================== -->
+	<bean id="freezePayResultHandleTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="freezePayResultHandleMethod"></property>
+		<property name="cronExpression" value="${FREEZE.PAY.RESULT}"></property>
+	</bean>
+
+	<bean id="freezePayResultHandle" class="com.smmpay.job.FreezePayResultHandleJob" />
+	<bean id="freezePayResultHandleMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="freezePayResultHandle" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean> 
+	<!-- ======================== 轮询待支付记录处理流程配置结束======================== -->
+	
+	<!-- ======================== 轮询解指令结果流程配置开始 ======================== -->
+	<bean id="unFreezePayResultHandleTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="unFreezePayResultHandleJobMethod"></property>
+		<property name="cronExpression" value="${UNFREEZE.PAY.RESULT}"></property>
+	</bean>
+
+	<bean id="unFreezePayResultHandle" class="com.smmpay.job.UNFreezePayResultHandleJob" />
+	<bean id="unFreezePayResultHandleJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="unFreezePayResultHandle" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean> 
+	<!-- ======================== 轮询解指令结果流程配置结束 ======================== -->
+	
+	<!-- ======================== 轮询支付冻结结果到商城流程配置开始======================== -->
+	 <bean id="payFreezeResultNotifyTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="payFreezeResultNotifyHandleMethod"></property>
+		<property name="cronExpression" value="0 */1 * * * ?"></property>
+	</bean>
+
+	<bean id="payFreezeResultHandle" class="com.smmpay.job.PayFreezeResultNotifyJob" />
+	<bean id="payFreezeResultNotifyHandleMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="payFreezeResultHandle" />
+		</property>
+		<property name="targetMethod">
+			<value>processNotifyResultToMall</value>
+		</property>
+	</bean>  
+	<!-- ======================== 轮询支付冻结结果到商城流程配置开始======================== -->
+	
+	<bean id="platformDebitsTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="platformDebitsMethod"></property>
+		<property name="cronExpression" value="${PLATFORMDEBITS.RESULT}"></property>
+	</bean>
+
+	<bean id="platformDebits" class="com.smmpay.job.PlatformDebitsJob" />
+	<bean id="platformDebitsMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="platformDebits" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean>  
+</beans>

@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smmpay.respository.dao.UserAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.smmpay.respository.model.UserAccount" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="id_card_url" property="idCardUrl" jdbcType="VARCHAR" />
+    <result column="authorize_url" property="authorizeUrl" jdbcType="VARCHAR" />
+    <result column="company_addr" property="companyAddr" jdbcType="VARCHAR" />
+    <result column="certificate_no" property="certificateNo" jdbcType="VARCHAR" />
+    <result column="certificate_url" property="certificateUrl" jdbcType="VARCHAR" />
+    <result column="registery_certificate_url" property="registeryCertificateUrl" jdbcType="VARCHAR" />
+    <result column="company_post_code" property="companyPostCode" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="contact_name" property="contactName" jdbcType="VARCHAR" />
+    <result column="mall_user_name" property="mallUserName" jdbcType="VARCHAR" />
+    <result column="audit_id" property="auditId" jdbcType="INTEGER" />
+    <result column="audit_time" property="auditTime" jdbcType="VARCHAR" />
+    <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+    <result column="freeze_money" property="freezeMoney" jdbcType="DECIMAL" />
+    <result column="use_money" property="useMoney" jdbcType="DECIMAL" />
+    <result column="register_ip" property="registerIp" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="VARCHAR" />
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name, password, id_card_url, authorize_url, company_addr, certificate_no, certificate_url,
+    registery_certificate_url, company_post_code, company_name, phone, mobile_phone, 
+    contact_name, mall_user_name, audit_id, audit_time, audit_status, freeze_money, use_money, 
+    register_ip, register_time, last_login_ip, last_login_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_account
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_account
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smmpay.respository.model.UserAccount" >
+    insert into user_account (user_id, user_name, password, 
+      id_card_url, authorize_url, company_addr, certificate_no,
+      certificate_url, registery_certificate_url, 
+      company_post_code, company_name, phone, 
+      mobile_phone, contact_name, mall_user_name, 
+      audit_id, audit_time, audit_status, 
+      freeze_money, use_money, register_ip, 
+      register_time, last_login_ip, last_login_time
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{idCardUrl,jdbcType=VARCHAR},#{authorizeUrl,jdbcType=VARCHAR}, #{companyAddr,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR},
+      #{certificateUrl,jdbcType=VARCHAR}, #{registeryCertificateUrl,jdbcType=VARCHAR}, 
+      #{companyPostCode,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{mobilePhone,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR}, #{mallUserName,jdbcType=VARCHAR}, 
+      #{auditId,jdbcType=INTEGER}, #{auditTime,jdbcType=VARCHAR}, #{auditStatus,jdbcType=INTEGER}, 
+      #{freezeMoney,jdbcType=DECIMAL}, #{useMoney,jdbcType=DECIMAL}, #{registerIp,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smmpay.respository.model.UserAccount" useGeneratedKeys="true" keyProperty="userId">
+    insert into user_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="idCardUrl != null" >
+        id_card_url,
+      </if>
+      <if test="authorizeUrl != null">
+        authorize_url,
+      </if>
+      <if test="companyAddr != null" >
+        company_addr,
+      </if>
+      <if test="certificateNo != null" >
+        certificate_no,
+      </if>
+      <if test="certificateUrl != null" >
+        certificate_url,
+      </if>
+      <if test="registeryCertificateUrl != null" >
+        registery_certificate_url,
+      </if>
+      <if test="companyPostCode != null" >
+        company_post_code,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone,
+      </if>
+      <if test="contactName != null" >
+        contact_name,
+      </if>
+      <if test="mallUserName != null" >
+        mall_user_name,
+      </if>
+      <if test="auditId != null" >
+        audit_id,
+      </if>
+      <if test="auditTime != null" >
+        audit_time,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="freezeMoney != null" >
+        freeze_money,
+      </if>
+      <if test="useMoney != null" >
+        use_money,
+      </if>
+      <if test="registerIp != null" >
+        register_ip,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardUrl != null" >
+        #{idCardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizeUrl != null" >
+        #{authorizeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null" >
+        #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateUrl != null" >
+        #{certificateUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="registeryCertificateUrl != null" >
+        #{registeryCertificateUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPostCode != null" >
+        #{companyPostCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="mallUserName != null" >
+        #{mallUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditId != null" >
+        #{auditId,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="freezeMoney != null" >
+        #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="useMoney != null" >
+        #{useMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="registerIp != null" >
+        #{registerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginIp != null" >
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updatePassword" parameterType="com.smmpay.respository.model.UserAccount" >
+    update user_account
+    set password = #{password,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updatePasswordByUserName" parameterType="com.smmpay.respository.model.UserAccount" >
+    update user_account
+    set password = #{password,jdbcType=VARCHAR}
+    where user_name = #{userName,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.smmpay.respository.model.UserAccount" >
+    update user_account
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardUrl != null" >
+        id_card_url = #{idCardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizeUrl != null">
+        authorize_url = #{authorizeUrl, jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        company_addr = #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null" >
+        certificate_no = #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateUrl != null" >
+        certificate_url = #{certificateUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="registeryCertificateUrl != null" >
+        registery_certificate_url = #{registeryCertificateUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPostCode != null" >
+        company_post_code = #{companyPostCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        contact_name = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="mallUserName != null" >
+        mall_user_name = #{mallUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditId != null" >
+        audit_id = #{auditId,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="freezeMoney != null" >
+        freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="useMoney != null" >
+        use_money = #{useMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="registerIp != null" >
+        register_ip = #{registerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smmpay.respository.model.UserAccount" >
+    update user_account
+    set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      id_card_url = #{idCardUrl,jdbcType=VARCHAR},
+    authorize_url = #{authorizeUrl,jdbcType=VARCHAR},
+      company_addr = #{companyAddr,jdbcType=VARCHAR},
+      certificate_no = #{certificateNo,jdbcType=VARCHAR},
+      certificate_url = #{certificateUrl,jdbcType=VARCHAR},
+      registery_certificate_url = #{registeryCertificateUrl,jdbcType=VARCHAR},
+      company_post_code = #{companyPostCode,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      mall_user_name = #{mallUserName,jdbcType=VARCHAR},
+      audit_id = #{auditId,jdbcType=INTEGER},
+      audit_time = #{auditTime,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+      use_money = #{useMoney,jdbcType=DECIMAL},
+      register_ip = #{registerIp,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=VARCHAR},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <select id="countByUserNameAndPassword" resultType="java.lang.Integer" >
+    select count(user_id)
+    from user_account
+    where user_id = #{userId}
+    and password = #{password}
+    <if test="userId != null" >
+      and user_id = #{userId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectUser" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from user_account
+    where user_name =  #{userName,jdbcType=VARCHAR}
+    <if test="password != null" >
+      and password =  #{password,jdbcType=VARCHAR}
+    </if>
+    <if test="userId != null" >
+      and user_id = #{userId,jdbcType=VARCHAR}
+    </if>
+    and audit_status != 2
+  </select>
+
+  <select id="countByProForAnd" resultType="java.lang.Integer" >
+    select count(user_id)
+    from user_account
+    where 1=1
+    <if test="userName != null" >
+      and user_name = #{userName,jdbcType=VARCHAR},
+    </if>
+    <if test="mallUserName != null" >
+      and mall_user_name = #{mallUserName,jdbcType=VARCHAR},
+    </if>
+  </select>
+
+  <select id="countByUserNameOrMallUserName" parameterType="com.smmpay.respository.model.UserAccount" resultType="java.lang.Integer" >
+    select count(user_id)
+    from user_account
+    where audit_status != 2
+    <if test="userName != null and mallUserName != null">
+      and (user_name = #{userName,jdbcType=VARCHAR} or mall_user_name = #{mallUserName,jdbcType=VARCHAR})
+    </if>
+    <if test="userName != null and mallUserName == null">
+      and user_name = #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="userName == null and mallUserName != null">
+      and mall_user_name = #{mallUserName,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="countByUserCompany" parameterType="com.smmpay.respository.model.UserAccount" resultType="java.lang.Integer">
+    select count(user_id)
+    from user_account
+    where audit_status != 2 and company_name = #{companyName,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="isOpenPayChannel" parameterType="com.smmpay.respository.model.UserAccount" resultType="java.lang.Integer" >
+    select count(user_id)
+    from user_account
+    where audit_status = 1
+    <if test="mallUserName != null">
+      and mall_user_name = #{mallUserName,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <!-- 修改账户余额-增加 -->
+  <update id="updateUserMoneyByUserId" parameterType="java.util.HashMap" >
+    update user_account
+   
+       set  use_money = use_money+#{changeMoney,jdbcType=DECIMAL}
+      
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 修改账户余额-减少 -->
+  <update id="updateUserMoneyByUserId2" parameterType="java.util.HashMap" >
+    update user_account 
+	    set  use_money = use_money-#{changeMoney,jdbcType=DECIMAL},
+	        freeze_money = freeze_money+#{changeMoney,jdbcType=DECIMAL}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <!-- 修改账户余额-减少 -->
+  <update id="updateUserMoneyByUserId3" parameterType="java.util.HashMap" >
+    update user_account 
+	    set  use_money = use_money-#{changeMoney,jdbcType=DECIMAL}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 修改账户冻结余额-减少 -->
+  <update id="updateUserMoneyByUserId4" parameterType="java.util.HashMap" >
+    update user_account
+    set  use_money = use_money-#{changeMoney,jdbcType=DECIMAL}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findAccountByUserName" parameterType="com.smmpay.respository.model.UserAccount" resultType="com.smmpay.respository.model.UserAccount" >
+   select
+   user_id as userId,user_name as userName,company_name as companyName
+    FROM user_account WHERE user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+   <select id="findAccountByMallUserName" parameterType="com.smmpay.respository.model.UserAccount" resultType="com.smmpay.respository.model.UserAccount" >
+   select
+   user_id as userId,user_name as userName,company_name as companyName,mall_user_name as mallUserName, contact_name as contactName
+    FROM user_account WHERE mall_user_name = #{mallUserName,jdbcType=VARCHAR} AND audit_status = 1
+  </select>
+  <select id="countUserByUserIdAndUserName" parameterType="com.smmpay.respository.model.UserAccount" resultType="java.lang.Integer" >
+  select count(user_id)
+  from user_account
+  where audit_status = 1
+    and user_id = #{userId,jdbcType=INTEGER}
+    and user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 冻结金额-增加 -->
+  <update id="updateFreezeMoneyByUserId" parameterType="java.util.HashMap" >
+    update user_account 
+	    set freeze_money = freeze_money+#{freezeMoney,jdbcType=DECIMAL}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <!-- 冻结金额-减少 -->
+  <update id="updateFreezeMoneyByUserId2" parameterType="java.util.HashMap" >
+    update user_account 
+	    set freeze_money = freeze_money-#{freezeMoney,jdbcType=DECIMAL}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
