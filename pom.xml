@@ -11,7 +11,7 @@
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>3.2.6.RELEASE</spring.version>
+    <spring.version>4.3.20.RELEASE</spring.version>
 	<hibernate.version>3.6.0.Beta2</hibernate.version>
 	<jpa.version>1.0.1.Final</jpa.version>
   </properties>
